@@ -370,9 +370,14 @@
   ul.shopping-items li.checked .qty-secondary{text-decoration:line-through;color:var(--ink-soft);opacity:.6}
   ul.shopping-items input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
   /* Small recipe-source tag under an ingredient's name in the "By Aisle" view,
-     so items stay traceable to their recipe even without a per-recipe card. */
-  .item-source{display:block;color:var(--ink-soft);font-size:.78rem;font-weight:400;margin-top:2px}
+     so items stay traceable to their recipe even without a per-recipe card.
+     Now a real link back to that recipe's detail page (see aisleItemLine). */
+  .item-source{display:block;color:var(--ink-soft);font-size:.78rem;font-weight:400;margin-top:2px;text-decoration:none;cursor:pointer}
+  .item-source:hover{text-decoration:underline}
   ul.shopping-items li.checked .item-source{text-decoration:none;opacity:.6}
+  /* "By Recipe" mode's group heading is also a link straight to that recipe. */
+  .shop-group-head h3 a{color:inherit;text-decoration:none;cursor:pointer}
+  .shop-group-head h3 a:hover{text-decoration:underline}
   .toast{
     position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
     background:var(--fern-dark);color:#fff;padding:10px 22px;border-radius:999px;
@@ -1152,7 +1157,7 @@ function groupItemsByAisle(items){
 }
 
 function aisleItemLine(it){
-  const sourceTag = `<span class="item-source">${it.recipeTitle}${it.servingsLabel ? ` (${it.servingsLabel})` : ""}</span>`;
+  const sourceTag = `<a class="item-source" href="#recipe/${it.slug}">${it.recipeTitle}${it.servingsLabel ? ` (${it.servingsLabel})` : ""}</a>`;
   return `<li class="${it.checked?"checked":""}"><input type="checkbox" data-slug="${it.slug}" data-idx="${it.idx}" ${it.checked?"checked":""}><span class="qty">${it.primaryStr}</span><span class="qty-secondary">${it.secondaryStr}</span><span class="ing-name">${it.name}${sourceTag}</span></li>`;
 }
 
@@ -1220,10 +1225,12 @@ function renderShoppingList(){
   renderShoppingListPrintView(slugs);
   if(!slugs.length){
     view.innerHTML = `
+      <span class="back-link" id="shoppingBackLink">&larr; Back to all recipes</span>
       <div class="empty">
         <div class="big">Your shopping list is empty</div>
         <div>Open a recipe and click "+ Add to Shopping List" to build one.</div>
       </div>`;
+    document.getElementById("shoppingBackLink").addEventListener("click", ()=> location.hash = "");
     return;
   }
 
@@ -1248,7 +1255,7 @@ function renderShoppingList(){
       return `
         <div class="shop-group">
           <div class="shop-group-head">
-            <h3>${r.title}${entry.servings ? ` <span style="color:var(--ink-soft);font-weight:400;font-size:.85rem">(${entry.servings} servings)</span>` : ""}</h3>
+            <h3><a href="#recipe/${slug}">${r.title}</a>${entry.servings ? ` <span style="color:var(--ink-soft);font-weight:400;font-size:.85rem">(${entry.servings} servings)</span>` : ""}</h3>
             <span class="remove-link" data-remove="${slug}">Remove recipe</span>
           </div>
           <ul class="shopping-items">${items || '<li style="grid-template-columns:1fr"><span class="ing-name">No ingredient list available for this recipe yet.</span></li>'}</ul>
@@ -1258,6 +1265,7 @@ function renderShoppingList(){
   }
 
   view.innerHTML = `
+    <span class="back-link" id="shoppingBackLink">&larr; Back to all recipes</span>
     <h2 style="margin-bottom:16px">Shopping List</h2>
     <div class="list-toolbar">
       <div class="groupby-toggle" role="group" aria-label="Group shopping list by">
@@ -1271,6 +1279,9 @@ function renderShoppingList(){
     <div class="list-note">${noteHtml}</div>
     ${bodyHtml}
   `;
+
+  const shoppingBackLink = document.getElementById("shoppingBackLink");
+  if(shoppingBackLink) shoppingBackLink.addEventListener("click", ()=> location.hash = "");
 
   const aisleBtn = document.getElementById("groupByAisleBtn");
   if(aisleBtn) aisleBtn.addEventListener("click", ()=> setGroupBy("aisle"));
@@ -1376,9 +1387,9 @@ function renderDetail(slug){
 
       <div class="regen-box">
         <h4>Fix or complete this recipe</h4>
-        <p>Open the source Markdown file to edit it directly, or copy a ready-made prompt and paste it in chat so Claude can update ${r.md_path} for you.</p>
+        <p>Copy a link straight to this recipe to share or save it, or copy a ready-made prompt and paste it in chat so Claude can update ${r.md_path} for you.</p>
         <div class="regen-actions">
-          <a href="${r.md_path}" target="_blank" rel="noopener">Open recipe file (.md)</a>
+          <button id="copyRecipeLinkBtn" type="button">Copy link to this recipe</button>
           <button id="copyPromptBtn" type="button">Copy prompt to paste in chat</button>
         </div>
       </div>
@@ -1428,6 +1439,20 @@ function renderDetail(slug){
     favBtn.addEventListener("click", ()=>{
       toggleFavorite(slug);
       renderDetail(slug);
+    });
+  }
+
+  const copyRecipeLinkBtn = document.getElementById("copyRecipeLinkBtn");
+  if(copyRecipeLinkBtn){
+    copyRecipeLinkBtn.addEventListener("click", ()=>{
+      const link = `${location.origin}${location.pathname}#recipe/${r.slug}`;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(link)
+          .then(()=> showToast("Link copied — paste it anywhere to share"))
+          .catch(()=> showToast("Could not copy automatically - select and copy the link manually"));
+      } else {
+        showToast("Clipboard not available in this browser - select and copy the link manually");
+      }
     });
   }
 
