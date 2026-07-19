@@ -403,46 +403,12 @@
     body.route-shopping-list #shoppingListView{display:none !important}
     body.route-shopping-list .print-only-list{display:block !important}
   }
-  @media (max-width:860px){
-    :root{font-size:16px}
-    .layout{flex-direction:column}
-    /* The old wrapped-pill category row is replaced on mobile by the fixed
-       bottom nav's "Categories" tab (opens .category-sheet) - see below. */
-    .sidebar{display:none}
-    body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
-    .bottom-nav{display:flex}
-    header.site{padding:14px 0}
-    header.site .meta{display:none}
-    header.site h1{font-size:1.32rem}
-    header.site .header-row{gap:10px}
-    .searchbar{width:100%;max-width:none}
-    .shopping-btn{display:none} /* moved into the bottom nav's Shopping tab */
-    .recipe-detail .hero{height:220px}
-    .recipe-detail .hero h2{font-size:1.6rem}
-    .detail-body{padding:20px}
-
-    /* Ingredient / shopping-list rows: stack the primary and secondary
-       quantity on top of each other in a narrow first column so the
-       ingredient name gets the rest of the (narrow) screen width instead
-       of being squeezed by three fixed-px columns. */
-    ul.ingredients li{
-      grid-template-columns:74px 1fr;grid-template-rows:auto auto;row-gap:2px;
-    }
-    ul.ingredients li .qty{grid-column:1;grid-row:1}
-    ul.ingredients li .qty-secondary{grid-column:1;grid-row:2}
-    ul.ingredients li .ing-name{grid-column:2;grid-row:1 / span 2;align-self:center}
-
-    ul.shopping-items li{
-      grid-template-columns:26px 74px 1fr;grid-template-rows:auto auto;row-gap:2px;
-    }
-    ul.shopping-items li input[type="checkbox"]{grid-column:1;grid-row:1 / span 2;align-self:center}
-    ul.shopping-items li .qty{grid-column:2;grid-row:1}
-    ul.shopping-items li .qty-secondary{grid-column:2;grid-row:2}
-    ul.shopping-items li .ing-name{grid-column:3;grid-row:1 / span 2;align-self:center}
-  }
-
   /* ---- Bottom navigation (phone/tablet only - hidden on desktop where the
-     sidebar handles categories) ---- */
+     sidebar handles categories). NOTE: this base rule (display:none) must
+     appear BEFORE the @media (max-width:860px) block below, since CSS
+     resolves equal-specificity conflicts by source order regardless of
+     which one is inside a media query - defining it after the media query
+     silently wins and hides the bar at every width. Keep it above. ---- */
   .bottom-nav{
     display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;
     background:#fff;border-top:1px solid var(--border);
@@ -509,6 +475,44 @@
     padding:20px 20px 20px 62px;font-size:1.28rem;line-height:1.55;
   }
   ol.steps.step-mode li.step-active::before{display:none}
+
+  @media (max-width:860px){
+    :root{font-size:16px}
+    .layout{flex-direction:column}
+    /* The old wrapped-pill category row is replaced on mobile by the fixed
+       bottom nav's "Categories" tab (opens .category-sheet) - see above. */
+    .sidebar{display:none}
+    body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+    .bottom-nav{display:flex}
+    header.site{padding:14px 0}
+    header.site .meta{display:none}
+    header.site h1{font-size:1.32rem}
+    header.site .header-row{gap:10px}
+    .searchbar{width:100%;max-width:none}
+    .shopping-btn{display:none} /* moved into the bottom nav's Shopping tab */
+    .recipe-detail .hero{height:220px}
+    .recipe-detail .hero h2{font-size:1.6rem}
+    .detail-body{padding:20px}
+
+    /* Ingredient / shopping-list rows: stack the primary and secondary
+       quantity on top of each other in a narrow first column so the
+       ingredient name gets the rest of the (narrow) screen width instead
+       of being squeezed by three fixed-px columns. */
+    ul.ingredients li{
+      grid-template-columns:74px 1fr;grid-template-rows:auto auto;row-gap:2px;
+    }
+    ul.ingredients li .qty{grid-column:1;grid-row:1}
+    ul.ingredients li .qty-secondary{grid-column:1;grid-row:2}
+    ul.ingredients li .ing-name{grid-column:2;grid-row:1 / span 2;align-self:center}
+
+    ul.shopping-items li{
+      grid-template-columns:26px 74px 1fr;grid-template-rows:auto auto;row-gap:2px;
+    }
+    ul.shopping-items li input[type="checkbox"]{grid-column:1;grid-row:1 / span 2;align-self:center}
+    ul.shopping-items li .qty{grid-column:2;grid-row:1}
+    ul.shopping-items li .qty-secondary{grid-column:2;grid-row:2}
+    ul.shopping-items li .ing-name{grid-column:3;grid-row:1 / span 2;align-self:center}
+  }
 </style>
 </head>
 <body>
