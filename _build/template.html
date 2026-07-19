@@ -819,14 +819,58 @@ function categoryLabel(c){
   return c.replace(/-/g," ").replace(/\b\w/g, m => m.toUpperCase());
 }
 
+// Splits free-text (title, category, cuisine, ingredient lines) into
+// lowercase word tokens on any run of non-alphanumeric characters (spaces,
+// hyphens, parentheses, commas, etc.), so each word can be matched on its
+// own rather than treating the whole field as one blob.
+function tokenize(str){
+  return (str || "").toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+}
+
+// Splits a search query into whitespace-separated terms only (hyphens are
+// left intact). Typing "gluten-free" is one term; typing "gluten free" is
+// two - see the tag-matching note below for why that distinction matters.
+function queryTerms(str){
+  return (str || "").toLowerCase().trim().split(/\s+/).filter(Boolean);
+}
+
+// Search matching, word-aware rather than a raw substring check. A raw
+// substring check (old behavior: `hay.includes(term)`) matches a query
+// anywhere in the text, including in the middle of an unrelated or even
+// opposite-meaning word - e.g. searching "meat" matched the "meatless" tag,
+// surfacing meat-free recipes for a meat search, and "dairy" matched the
+// "dairy-free" tag, surfacing dairy-free recipes. Fixed by:
+//   - splitting the query into individual terms, requiring every term to
+//     match somewhere (AND across terms, not one long contiguous phrase -
+//     so "chicken salad" finds "Chicken Caesar Salad" even though that
+//     exact phrase isn't contiguous in the title).
+//   - for free-text fields (title, category, cuisine, ingredients), matching
+//     a term as a *prefix* of a whole word, so partial typing still works
+//     ("chick" -> "chicken", "toma" -> "tomato").
+//   - for the curated tag/diet vocabulary, matching a term only against a
+//     tag's *exact, un-split* text (lowercased) - not a prefix, and not
+//     tokenized further. Tags are short, deliberately-chosen labels, often
+//     hyphenated negations ("meatless", "dairy-free", "gluten-free"), so
+//     both prefix-matching them ("meat" -> "meatless") and word-splitting
+//     them on the hyphen ("dairy-free" -> "dairy" + "free", making "dairy"
+//     alone match) reintroduce the same false-positive bug. Matching the
+//     whole tag string means typing the full tag as shown on the recipe
+//     card ("vegetarian", "gluten-free") finds it, while a single word
+//     that's merely a prefix or a fragment of a different tag does not.
 function matchesSearch(r, term){
-  if(!term) return true;
-  const hay = [
+  const terms = queryTerms(term);
+  if(terms.length === 0) return true;
+
+  const prefixWords = tokenize([
     r.title, r.category, r.cuisine || "",
-    (r.tags||[]).join(" "), (r.diet||[]).join(" "),
     (r.ingredients||[]).map(i=>i.text||i.raw).join(" ")
-  ].join(" ").toLowerCase();
-  return hay.includes(term.toLowerCase());
+  ].join(" "));
+
+  const wholeTags = [...(r.tags||[]), ...(r.diet||[])].map(t => String(t).toLowerCase().trim());
+
+  return terms.every(t =>
+    wholeTags.includes(t) || prefixWords.some(w => w.startsWith(t))
+  );
 }
 
 // A category click (from the sidebar, the mobile sheet, or a bottom-nav
