@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Cookbook</title>
+<!-- iOS "Add to Home Screen" support: makes the site behave like an app icon
+     with no Safari address bar. See https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Our Cookbook">
+<meta name="theme-color" content="#4a7c59">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<style>
+  :root{
+    --fern:#4a7c59;
+    --fern-dark:#38604a;
+    --marigold:#f9a620;
+    --terracotta:#b7472a;
+    --cream:#f5f3ed;
+    --card:#ffffff;
+    --ink:#2f2a22;
+    --ink-soft:#6b6455;
+    --border:#e2ddd0;
+    --radius:14px;
+    --shadow:0 2px 10px rgba(47,42,34,0.08);
+    --shadow-lg:0 12px 32px rgba(47,42,34,0.14);
+    font-size:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+  }
+  h1,h2,h3,.serif{
+    font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+    color:var(--fern-dark);
+    font-weight:700;
+    margin:0 0 .4em;
+  }
+  a{color:var(--fern-dark)}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+
+  /* Header */
+  header.site{
+    position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg, var(--fern) 0%, var(--fern-dark) 100%);
+    color:#fff;
+    padding:20px 0;
+    box-shadow:var(--shadow);
+  }
+  header.site .header-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  header.site h1{color:#fff;font-size:1.9rem;letter-spacing:.01em;margin:0}
+  header.site .meta{color:#e9f2ec;font-size:.88rem;margin-top:2px}
+  header.site .titleblock{margin-right:auto}
+  .searchbar{
+    display:flex;gap:10px;align-items:center;
+    background:#fff;border-radius:999px;padding:9px 18px;
+    box-shadow:var(--shadow);
+    min-width:260px;flex:1;max-width:420px;
+  }
+  .searchbar input{
+    border:none;outline:none;flex:1;font-size:1.02rem;
+    font-family:inherit;color:var(--ink);background:transparent;
+  }
+  .searchbar svg{flex-shrink:0}
+  .shopping-btn{
+    position:relative;display:flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.45);
+    color:#fff;padding:9px 18px;border-radius:999px;cursor:pointer;
+    font-size:.95rem;font-family:inherit;white-space:nowrap;
+  }
+  .shopping-btn:hover{background:rgba(255,255,255,.26)}
+  .shopping-btn .badge{
+    background:var(--marigold);color:#4a3200;font-weight:700;font-size:.78rem;
+    border-radius:999px;padding:1px 8px;
+  }
+
+  /* Layout: sidebar + main */
+  .layout{display:flex;gap:32px;align-items:flex-start;padding:28px 0 80px}
+  .sidebar{
+    width:230px;flex-shrink:0;
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:18px 0;
+  }
+  .sidebar h4{
+    margin:0 18px 10px;font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;
+    color:var(--ink-soft);
+  }
+  .nav-item{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 18px;cursor:pointer;font-size:1rem;color:var(--ink);
+    border-left:3px solid transparent;
+  }
+  .nav-item:hover{background:var(--cream)}
+  .nav-item.active{
+    background:var(--cream);border-left-color:var(--marigold);
+    color:var(--fern-dark);font-weight:700;
+  }
+  .nav-item .count{
+    font-size:.8rem;color:var(--ink-soft);background:var(--cream);
+    border-radius:999px;padding:1px 9px;
+  }
+  .nav-item.active .count{background:#fff}
+
+  main{flex:1;min-width:0}
+
+  /* Recipe grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:22px;
+  }
+  .card{
+    background:var(--card);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);cursor:pointer;
+    transition:transform .15s, box-shadow .15s;
+    display:flex;flex-direction:column;
+    border:1px solid var(--border);
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .card .thumb{
+    height:160px;background:linear-gradient(135deg,var(--fern) 0%,var(--marigold) 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:Georgia,serif;font-size:2.2rem;font-weight:700;
+    position:relative;overflow:hidden;
+  }
+  .card .thumb .thumb-initials{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:0}
+  .card .thumb img.thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
+  .card .badge-incomplete{
+    position:absolute;top:10px;right:10px;background:var(--terracotta);color:#fff;
+    font-size:.7rem;padding:4px 10px;border-radius:999px;font-weight:600;z-index:2;
+  }
+  .fav-btn{
+    position:absolute;top:10px;left:10px;z-index:3;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.9);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.25);
+    color:var(--fern-dark);transition:transform .12s;
+  }
+  .fav-btn:hover{transform:scale(1.1)}
+  .fav-btn.active{color:var(--marigold)}
+  .fav-btn svg{display:block}
+  .card .body{padding:15px 17px 17px;flex:1;display:flex;flex-direction:column;gap:7px}
+  .card h3{font-size:1.14rem;margin:0}
+  .card .cat{
+    text-transform:uppercase;letter-spacing:.06em;font-size:.7rem;
+    color:var(--terracotta);font-weight:700;
+  }
+  .card .facts{display:flex;gap:14px;color:var(--ink-soft);font-size:.86rem;margin-top:auto}
+  .card .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{
+    background:var(--cream);border:1px solid var(--border);color:var(--ink-soft);
+    font-size:.74rem;padding:3px 10px;border-radius:999px;
+  }
+  .empty{
+    text-align:center;padding:70px 20px;color:var(--ink-soft);
+  }
+  .empty .big{font-size:2.2rem;margin-bottom:10px;font-family:Georgia,serif;color:var(--fern-dark)}
+
+  /* Detail view */
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;color:var(--fern-dark);
+    text-decoration:none;font-weight:600;margin-bottom:18px;cursor:pointer;
+  }
+  .recipe-detail{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    overflow:hidden;border:1px solid var(--border);
+  }
+  .recipe-detail .hero{
+    height:300px;background:linear-gradient(135deg,var(--fern) 0%,var(--marigold) 100%);
+    display:flex;align-items:flex-end;position:relative;
+  }
+  .recipe-detail .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .recipe-detail .hero .overlay{
+    position:relative;z-index:1;width:100%;
+    background:linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 70%);
+    padding:24px 30px;color:#fff;
+  }
+  .recipe-detail .hero h2{color:#fff;font-size:2.1rem;margin-bottom:0}
+  .recipe-detail .hero .cat{color:#ffe9b8}
+  .detail-title-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:4px}
+  .fav-btn-detail{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.6);
+    color:#fff;padding:8px 18px;border-radius:999px;cursor:pointer;
+    font-size:.88rem;font-family:inherit;font-weight:600;white-space:nowrap;
+  }
+  .fav-btn-detail:hover{background:rgba(255,255,255,.3)}
+  .fav-btn-detail.active{background:var(--marigold);border-color:var(--marigold);color:#4a3200}
+  .fav-btn-detail svg{display:block}
+  .detail-body{padding:26px 30px 38px}
+  .fact-row{display:flex;flex-wrap:wrap;gap:22px;margin:6px 0 22px;color:var(--ink-soft)}
+  .fact{display:flex;flex-direction:column}
+  .fact .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+  .fact .value{font-size:1.12rem;color:var(--ink);font-weight:600}
+  .incomplete-banner{
+    background:#fdecea;border:1px solid var(--terracotta);color:#7a2814;
+    padding:14px 18px;border-radius:10px;margin-bottom:22px;font-size:.95rem;
+  }
+  .missing-box{
+    background:#fdecea;border:1px dashed var(--terracotta);color:#7a2814;
+    padding:16px 18px;border-radius:10px;font-size:.95rem;
+  }
+  .missing-info-box{
+    background:#fff8ec;border:1px solid var(--marigold);color:#5c4108;
+    padding:16px 18px;border-radius:10px;font-size:.95rem;margin-bottom:22px;
+  }
+  .missing-info-box h4{margin:0 0 8px;font-size:.95rem;color:#8a5a00}
+  .missing-info-box ul{margin:0;padding-left:0;list-style:none}
+  .missing-info-box li{padding:3px 0}
+  .description{font-size:1.06rem;color:var(--ink);margin-bottom:26px}
+  .description.description-na{color:var(--ink-soft);font-style:italic}
+
+  /* Top-of-page info block: description at the very top, prep/cook/total/
+     difficulty in a compact stat box that sits in the top-left corner. */
+  .top-info{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:8px}
+  .stat-box{
+    flex:0 0 210px;display:flex;flex-direction:column;gap:11px;
+    background:var(--cream);border:1px solid var(--border);border-radius:12px;
+    padding:16px 20px;
+  }
+  .stat-box .fact{flex-direction:row;justify-content:space-between;align-items:center;gap:10px}
+  .stat-box .fact .label{white-space:nowrap}
+  .stat-box .fact .value{font-size:1rem}
+  .top-info .description-wrap{flex:1 1 320px;min-width:240px}
+  .top-info .description{margin-bottom:0}
+
+  .difficulty-meter{display:inline-flex;align-items:center;gap:7px}
+  .difficulty-meter .bars{display:flex;align-items:flex-end;gap:3px}
+  .difficulty-meter .bar{width:6px;border-radius:2px;background:var(--border)}
+  .difficulty-meter .bar.b1{height:8px}
+  .difficulty-meter .bar.b2{height:13px}
+  .difficulty-meter .bar.b3{height:18px}
+  .difficulty-meter .bar.filled.level-1{background:var(--fern)}
+  .difficulty-meter .bar.filled.level-2{background:var(--marigold)}
+  .difficulty-meter .bar.filled.level-3{background:var(--terracotta)}
+  .difficulty-meter .diff-text{font-size:.95rem;font-weight:600;color:var(--ink)}
+
+  .source-line{font-size:.94rem;color:var(--ink-soft);margin-bottom:22px}
+  .source-line a{font-weight:600}
+
+  .photo-fallback-tag{
+    position:absolute;left:0;right:0;bottom:0;z-index:2;
+    background:rgba(47,42,34,.62);color:#fff;font-size:.68rem;
+    padding:4px 10px;letter-spacing:.02em;
+  }
+  .recipe-detail .hero .photo-fallback-tag{font-size:.78rem;padding:6px 14px}
+
+  .regen-box{
+    margin-top:8px;background:var(--cream);border:1px solid var(--border);
+    border-radius:12px;padding:18px 20px;
+  }
+  .regen-box h4{margin:0 0 8px;font-size:1rem;color:var(--fern-dark)}
+  .regen-box p{margin:0 0 12px;font-size:.92rem;color:var(--ink-soft)}
+  .regen-actions{display:flex;flex-wrap:wrap;gap:10px}
+  .regen-actions a, .regen-actions button{
+    font-family:inherit;font-size:.9rem;font-weight:600;
+    padding:9px 18px;border-radius:999px;cursor:pointer;text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .regen-actions a{background:#fff;border:1px solid var(--border);color:var(--fern-dark)}
+  .regen-actions button{background:var(--fern);color:#fff;border:none}
+  .regen-actions button:hover{background:var(--fern-dark)}
+
+  .section{margin-bottom:30px}
+  .section h3{font-size:1.35rem;border-bottom:2px solid var(--border);padding-bottom:8px;margin-bottom:16px}
+  .servings-control{
+    display:flex;align-items:center;gap:12px;margin-bottom:16px;
+    background:var(--cream);border-radius:10px;padding:10px 16px;width:fit-content;
+  }
+  .servings-control button{
+    width:32px;height:32px;border-radius:50%;border:1px solid var(--border);
+    background:#fff;font-size:1.1rem;cursor:pointer;color:var(--fern-dark);font-weight:700;
+  }
+  .servings-control button:hover{background:var(--fern);color:#fff}
+  .servings-control .count{font-weight:700;font-size:1.1rem;min-width:90px;text-align:center}
+  .add-to-list-btn{
+    display:inline-block;margin-bottom:14px;background:var(--marigold);color:#4a3200;
+    border:none;padding:9px 20px;border-radius:999px;cursor:pointer;font-size:.9rem;font-weight:700;
+  }
+  .add-to-list-btn:hover{background:#e8951a}
+
+  /* Ingredient list: grid-aligned quantity / secondary-quantity / name columns */
+  ul.ingredients{list-style:none;padding:0;margin:0}
+  ul.ingredients li{
+    display:grid;grid-template-columns:92px 140px 1fr;column-gap:12px;align-items:baseline;
+    padding:9px 0;border-bottom:1px solid var(--border);font-size:1.02rem;
+  }
+  ul.ingredients li:last-child{border-bottom:none}
+  ul.ingredients li .qty{font-weight:700;color:var(--fern-dark);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.ingredients li .qty-secondary{color:var(--ink-soft);font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.ingredients li .ing-name{min-width:0}
+
+  ol.steps{padding-left:0;list-style:none;counter-reset:step}
+  ol.steps li{
+    counter-increment:step;position:relative;padding:10px 0 10px 46px;
+    margin-bottom:6px;font-size:1.04rem;
+  }
+  ol.steps li::before{
+    content:counter(step);position:absolute;left:0;top:8px;
+    width:32px;height:32px;border-radius:50%;background:var(--fern);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;
+  }
+  .notes-box{
+    background:var(--cream);border-left:4px solid var(--marigold);
+    padding:14px 18px;border-radius:8px;font-size:1rem;white-space:pre-wrap;
+  }
+  .source-box{
+    background:var(--cream);border-radius:10px;padding:16px 20px;font-size:.94rem;color:var(--ink-soft);
+  }
+  .diet-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;padding:30px 0}
+
+  /* Shopping list view */
+  .list-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+  .list-toolbar button{
+    background:var(--fern);color:#fff;border:none;padding:10px 20px;border-radius:999px;
+    cursor:pointer;font-size:.92rem;font-weight:600;
+  }
+  .list-toolbar button.secondary{background:#fff;color:var(--fern-dark);border:1px solid var(--border)}
+  .list-toolbar button.danger{background:#fff;color:var(--terracotta);border:1px solid var(--terracotta)}
+  .groupby-toggle{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+  .groupby-toggle button{
+    background:#fff;color:var(--fern-dark);border:none;padding:10px 18px;cursor:pointer;
+    font-size:.92rem;font-weight:600;border-radius:0;
+  }
+  .groupby-toggle button.active{background:var(--fern);color:#fff}
+  .groupby-toggle button + button{border-left:1px solid var(--border)}
+  .list-note{color:var(--ink-soft);font-size:.88rem;margin-bottom:20px;max-width:70ch}
+  .shop-group{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 24px;margin-bottom:20px;
+  }
+  .shop-group-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+  .shop-group-head h3{margin:0;font-size:1.2rem;border:none;padding:0}
+  .shop-group-head .remove-link{color:var(--terracotta);font-size:.85rem;cursor:pointer;font-weight:600;white-space:nowrap}
+  .aisle-group-head .aisle-count{color:var(--ink-soft);font-size:.85rem;font-weight:400;white-space:nowrap}
+  ul.shopping-items{list-style:none;padding:0;margin:0}
+  ul.shopping-items li{
+    display:grid;grid-template-columns:26px 92px 140px 1fr;column-gap:12px;align-items:baseline;
+    padding:8px 0;border-bottom:1px solid var(--border);font-size:1rem;
+  }
+  ul.shopping-items li:last-child{border-bottom:none}
+  ul.shopping-items li .qty{font-weight:700;color:var(--fern-dark);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.shopping-items li .qty-secondary{color:var(--ink-soft);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.shopping-items li.checked .ing-name,
+  ul.shopping-items li.checked .qty,
+  ul.shopping-items li.checked .qty-secondary{text-decoration:line-through;color:var(--ink-soft);opacity:.6}
+  ul.shopping-items input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
+  /* Small recipe-source tag under an ingredient's name in the "By Aisle" view,
+     so items stay traceable to their recipe even without a per-recipe card. */
+  .item-source{display:block;color:var(--ink-soft);font-size:.78rem;font-weight:400;margin-top:2px}
+  ul.shopping-items li.checked .item-source{text-decoration:none;opacity:.6}
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    background:var(--fern-dark);color:#fff;padding:10px 22px;border-radius:999px;
+    font-size:.92rem;box-shadow:var(--shadow-lg);z-index:999;opacity:0;pointer-events:none;
+    transition:opacity .2s;
+  }
+  .toast.show{opacity:1}
+
+  /* Print-only flat shopping list: built by JS as a completely separate,
+     minimal DOM block (no sidebar, no per-recipe cards/headings, no
+     toolbar) so printing/PDF-export can never inherit the on-screen
+     grouped layout, regardless of any other print rule below. Hidden
+     on screen at all times; only shown for print, and only while the
+     shopping-list route is actually active (see body.route-shopping-list
+     below) so it never bleeds into printing a recipe page instead. */
+  .print-only-list{display:none}
+  .print-only-list h2{margin:0 0 14px;font-size:1.4rem}
+  .print-only-list ul{list-style:none;margin:0;padding:0}
+  .print-only-list li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px solid #ccc;font-size:1rem;break-inside:avoid}
+  .print-only-list .pqty{font-weight:700;white-space:nowrap;min-width:88px}
+  .print-only-list .pqty2{color:#555;font-size:.85rem;white-space:nowrap;min-width:100px}
+  .print-only-list .psource{color:#666;font-size:.85rem}
+  /* Plain-text section label above a group of items - no box, no button, no
+     link. Used both for a recipe name ("By Recipe" mode) and an aisle name
+     ("By Aisle" mode, the default) - either way it's just enough to keep
+     every item below it identifiable/traceable. */
+  .print-only-list li.precipe{
+    display:block;border-bottom:none;font-weight:700;font-size:1.05rem;
+    margin-top:16px;padding:0 0 4px;break-inside:avoid;break-after:avoid;
+  }
+  .print-only-list li.precipe:first-of-type{margin-top:4px}
+
+  @media print{
+    /* !important on every one of these: Chrome (and other browsers) evaluate
+       the @media (max-width:860px) mobile layout rules below using the
+       print page's rendered width, which for a portrait US Letter/A4 page
+       is narrower than 860px - so without !important here, that later
+       mobile rule (.sidebar{display:flex;...}) was winning the cascade and
+       re-showing the sidebar as a vertical list of category pills during
+       print/PDF export, even though this print rule "set" display:none. */
+    header.site, .back-link, .servings-control button, .sidebar, .list-toolbar, .remove-link, .add-to-list-btn, .fav-btn, .fav-btn-detail, .regen-box{display:none !important}
+    .layout{display:block !important}
+    body.route-shopping-list #shoppingListView{display:none !important}
+    body.route-shopping-list .print-only-list{display:block !important}
+  }
+  @media (max-width:860px){
+    :root{font-size:16px}
+    .layout{flex-direction:column}
+    .sidebar{
+      width:100%;display:flex;flex-wrap:wrap;gap:6px;padding:14px;
+    }
+    .sidebar h4{width:100%;margin:0 0 6px}
+    .nav-item{
+      border-left:none;border:1px solid var(--border);border-radius:999px;
+      padding:6px 14px;
+    }
+    .nav-item.active{border-color:var(--marigold)}
+    .recipe-detail .hero{height:220px}
+    .recipe-detail .hero h2{font-size:1.6rem}
+    .detail-body{padding:20px}
+    ul.ingredients li{grid-template-columns:80px 116px 1fr}
+    ul.shopping-items li{grid-template-columns:22px 80px 116px 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap header-row">
+    <div class="titleblock">
+      <h1>Our Cookbook</h1>
+      <div class="meta"><span id="recipeCount">__RECIPE_COUNT__</span> recipes - last built __GENERATED_DATE__</div>
+    </div>
+    <div class="searchbar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Search by title, ingredient, or tag..." autocomplete="off">
+    </div>
+    <button class="shopping-btn" id="shoppingBtn" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Shopping List<span class="badge" id="shoppingBadge" style="display:none">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <aside class="sidebar">
+    <h4>Categories</h4>
+    <div id="categoryNav"></div>
+  </aside>
+
+  <main>
+    <div id="browseView">
+      <div class="grid" id="recipeGrid"></div>
+      <div class="empty" id="emptyState" style="display:none">
+        <div class="big">No matches</div>
+        <div>No recipes match that search yet.</div>
+      </div>
+    </div>
+
+    <div id="detailView" style="display:none">
+      <span class="back-link" id="backLink">&larr; Back to all recipes</span>
+      <div class="recipe-detail" id="detailContent"></div>
+    </div>
+
+    <div id="shoppingListView" style="display:none"></div>
+    <div id="shoppingListPrintView" class="print-only-list"></div>
+  </main>
+</div>
+
+<footer>Generated from Markdown by <code>_build/build.py</code> - the recipe files under <code>recipes/</code> are the source of truth.</footer>
+
+<script>
+const DATA = /*__RECIPE_DATA__*/;
+const RECIPES = DATA.recipes;
+const CATEGORIES = DATA.categories;
+
+function showErrorBanner(msg){
+  let el = document.getElementById("jsErrorBanner");
+  if(!el){
+    el = document.createElement("div");
+    el.id = "jsErrorBanner";
+    el.style.cssText = "position:fixed;bottom:0;left:0;right:0;background:#b7472a;color:#fff;padding:14px 20px;font-family:monospace;font-size:13px;z-index:9999;white-space:pre-wrap;max-height:40vh;overflow:auto;";
+    document.body.appendChild(el);
+  }
+  el.textContent = "Site script error (please report this text): " + msg;
+}
+window.addEventListener("error", function(e){
+  showErrorBanner((e.message||"unknown error") + " at line " + e.lineno + ":" + e.colno);
+});
+
+let activeCategory = "all";
+let searchTerm = "";
+let currentServings = {}; // slug -> current servings override
+
+// ---- shopping list state (persisted to localStorage where available) ----
+const SHOPPING_KEY = "cookbook_shopping_list_v1";
+
+function loadShoppingList(){
+  try{
+    const raw = localStorage.getItem(SHOPPING_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e){ return {}; }
+}
+function saveShoppingList(){
+  try{ localStorage.setItem(SHOPPING_KEY, JSON.stringify(shoppingList)); }
+  catch(e){ /* storage unavailable (e.g. some browsers restrict it for file:// pages) - list still works for this session */ }
+}
+let shoppingList = loadShoppingList(); // { [slug]: { servings: N|null, checked: {idx: true} } }
+
+// ---- shopping list grouping mode ("aisle" or "recipe"), persisted like the list itself ----
+const GROUPBY_KEY = "cookbook_shopping_groupby_v1";
+function loadGroupBy(){
+  try{ return localStorage.getItem(GROUPBY_KEY) === "recipe" ? "recipe" : "aisle"; }
+  catch(e){ return "aisle"; }
+}
+function saveGroupBy(){
+  try{ localStorage.setItem(GROUPBY_KEY, groupBy); } catch(e){ /* storage unavailable - session-only, same fallback as the list itself */ }
+}
+let groupBy = loadGroupBy(); // "aisle" (default) or "recipe"
+function setGroupBy(mode){
+  if(groupBy === mode) return;
+  groupBy = mode;
+  saveGroupBy();
+  renderShoppingList();
+}
+
+// ---- grocery-aisle classification for the shopping list's "By Aisle" view ----
+// A heuristic keyword lookup, same spirit as build.py's DENSITY_G_PER_CUP
+// table (§5b of the meta-prompt): a small, documented, ordered list where
+// more specific phrases are checked before generic single words, since the
+// first match wins. This exists purely to speed up shopping (walking a
+// store in one pass, or adding items to an online cart section by
+// section) - it is NOT a factual claim about any product, and a
+// misclassified ingredient is never hidden, just filed under the wrong
+// (or "Other") section. To extend it: add a new [phrase, aisle] pair:
+// specific compounds (e.g. "chicken broth") must come before the generic
+// word they contain (e.g. "chicken") or the generic one will win first.
+const AISLE_ORDER = ["Produce","Meat & Seafood","Dairy & Eggs","Bread & Bakery","Frozen","Condiments, Oils & Sauces","Herbs & Spices","Pantry & Dry Goods","Beverages","Other"];
+const AISLE_KEYWORDS = [
+  // --- specific compounds first (override the generic word they contain) ---
+  ["frozen ", "Frozen"], ["ice cream", "Frozen"], ["puff pastry", "Frozen"],
+  ["chicken broth","Pantry & Dry Goods"], ["chicken stock","Pantry & Dry Goods"],
+  ["beef broth","Pantry & Dry Goods"], ["beef stock","Pantry & Dry Goods"],
+  ["vegetable broth","Pantry & Dry Goods"], ["vegetable stock","Pantry & Dry Goods"],
+  ["bone broth","Pantry & Dry Goods"], ["bouillon","Pantry & Dry Goods"],
+  ["coconut milk","Pantry & Dry Goods"], ["condensed milk","Pantry & Dry Goods"],
+  ["evaporated milk","Pantry & Dry Goods"], ["almond milk","Pantry & Dry Goods"],
+  ["oat milk","Pantry & Dry Goods"], ["soy milk","Pantry & Dry Goods"],
+  ["tomato paste","Condiments, Oils & Sauces"], ["tomato sauce","Condiments, Oils & Sauces"],
+  ["tomato juice","Beverages"], ["marinara","Condiments, Oils & Sauces"],
+  ["crushed tomato","Pantry & Dry Goods"], ["diced tomato","Pantry & Dry Goods"],
+  ["canned tomato","Pantry & Dry Goods"], ["sun-dried tomato","Pantry & Dry Goods"], ["sundried tomato","Pantry & Dry Goods"],
+  ["vanilla extract","Herbs & Spices"], ["almond extract","Herbs & Spices"],
+  ["chili powder","Herbs & Spices"], ["curry powder","Herbs & Spices"],
+  ["garlic powder","Herbs & Spices"], ["onion powder","Herbs & Spices"],
+  ["bay leaf","Herbs & Spices"], ["bay leaves","Herbs & Spices"],
+  ["ground ginger","Herbs & Spices"], ["ground cinnamon","Herbs & Spices"], ["cinnamon stick","Herbs & Spices"],
+  ["pumpkin pie spice","Herbs & Spices"], ["italian seasoning","Herbs & Spices"], ["za'atar","Herbs & Spices"],
+  ["black pepper","Herbs & Spices"], ["ground pepper","Herbs & Spices"], ["red pepper flakes","Herbs & Spices"],
+  ["crushed red pepper","Herbs & Spices"], ["cayenne","Herbs & Spices"],
+  ["olive oil","Condiments, Oils & Sauces"], ["vegetable oil","Condiments, Oils & Sauces"],
+  ["canola oil","Condiments, Oils & Sauces"], ["sesame oil","Condiments, Oils & Sauces"], ["avocado oil","Condiments, Oils & Sauces"],
+  ["soy sauce","Condiments, Oils & Sauces"], ["fish sauce","Condiments, Oils & Sauces"], ["hot sauce","Condiments, Oils & Sauces"],
+  ["worcestershire","Condiments, Oils & Sauces"], ["hoisin","Condiments, Oils & Sauces"], ["coconut aminos","Condiments, Oils & Sauces"], ["tamari","Condiments, Oils & Sauces"],
+  ["maple syrup","Condiments, Oils & Sauces"], ["corn syrup","Condiments, Oils & Sauces"], ["dijon","Condiments, Oils & Sauces"], ["mustard","Condiments, Oils & Sauces"],
+  ["mayonnaise","Condiments, Oils & Sauces"], [" mayo","Condiments, Oils & Sauces"], ["ketchup","Condiments, Oils & Sauces"],
+  ["salad dressing","Condiments, Oils & Sauces"], ["vinaigrette","Condiments, Oils & Sauces"], ["pickle","Condiments, Oils & Sauces"], ["olives","Condiments, Oils & Sauces"], ["tahini","Condiments, Oils & Sauces"],
+  ["cream cheese","Dairy & Eggs"], ["goat cheese","Dairy & Eggs"], ["cottage cheese","Dairy & Eggs"],
+  ["sour cream","Dairy & Eggs"], ["half and half","Dairy & Eggs"], ["half-and-half","Dairy & Eggs"],
+  ["heavy cream","Dairy & Eggs"], ["heavy whipping cream","Dairy & Eggs"], ["whipping cream","Dairy & Eggs"], ["boursin","Dairy & Eggs"],
+  ["ground beef","Meat & Seafood"], ["salt cod","Meat & Seafood"], ["bacalao","Meat & Seafood"], ["bacalhau","Meat & Seafood"],
+  ["sweet potato","Produce"], ["green bean","Produce"], ["bell pepper","Produce"], ["poblano","Produce"], ["jalapeno","Produce"], ["jalapeño","Produce"], ["serrano pepper","Produce"],
+  ["romaine lettuce","Produce"], ["cherry tomato","Produce"], ["pearl onion","Produce"], ["fresh dill","Produce"], ["fresh parsley","Produce"], ["fresh basil","Produce"], ["fresh chive","Produce"], ["fresh mint","Produce"], ["mint leaves","Produce"], ["lemon zest","Produce"], ["lemon juice","Produce"],
+  ["french bread","Bread & Bakery"], ["bread crumb","Pantry & Dry Goods"], ["panko","Pantry & Dry Goods"],
+  // --- then generic single words/short phrases (broader match) ---
+  ["lettuce","Produce"], ["spinach","Produce"], ["kale","Produce"], ["arugula","Produce"], ["cabbage","Produce"],
+  ["cucumber","Produce"], ["zucchini","Produce"], ["squash","Produce"], ["pepper","Produce"], ["onion","Produce"],
+  ["garlic","Produce"], ["shallot","Produce"], ["scallion","Produce"], ["leek","Produce"], ["carrot","Produce"],
+  ["celery","Produce"], ["potato","Produce"], ["tomato","Produce"], ["avocado","Produce"], ["mushroom","Produce"],
+  ["broccoli","Produce"], ["cauliflower","Produce"], ["asparagus","Produce"], ["pea","Produce"], ["corn","Produce"],
+  ["radish","Produce"], ["beet","Produce"], ["artichoke","Produce"], ["eggplant","Produce"], ["fennel","Produce"],
+  ["apple","Produce"], ["pear","Produce"], ["banana","Produce"], ["lemon","Produce"], ["lime","Produce"],
+  ["orange","Produce"], ["grapefruit","Produce"], ["berry","Produce"], ["berries","Produce"], ["strawberr","Produce"],
+  ["blueberr","Produce"], ["raspberr","Produce"], ["blackberr","Produce"], ["cherry","Produce"], ["peach","Produce"],
+  ["plum","Produce"], ["mango","Produce"], ["pineapple","Produce"], ["melon","Produce"], ["watermelon","Produce"],
+  ["grape","Produce"], ["fig","Produce"], ["date","Produce"], ["pomegranate","Produce"], ["cilantro","Produce"],
+  ["parsley","Produce"], ["basil","Produce"], ["mint","Produce"], ["dill","Produce"], ["chive","Produce"],
+  ["rosemary","Produce"], ["thyme","Produce"], ["oregano","Herbs & Spices"], ["sage","Produce"], ["tarragon","Produce"],
+  ["ginger","Produce"], ["chili pepper","Produce"], ["chile","Produce"], ["za'atar","Herbs & Spices"],
+  ["chicken","Meat & Seafood"], ["beef","Meat & Seafood"], ["steak","Meat & Seafood"], ["pork","Meat & Seafood"],
+  ["bacon","Meat & Seafood"], ["sausage","Meat & Seafood"], ["chorizo","Meat & Seafood"], ["ham","Meat & Seafood"],
+  ["lamb","Meat & Seafood"], ["turkey","Meat & Seafood"], ["salmon","Meat & Seafood"], ["shrimp","Meat & Seafood"],
+  ["fish","Meat & Seafood"], ["cod","Meat & Seafood"], ["halibut","Meat & Seafood"], ["tuna","Meat & Seafood"],
+  ["clam","Meat & Seafood"], ["mussel","Meat & Seafood"], ["scallop","Meat & Seafood"], ["lobster","Meat & Seafood"],
+  ["crab","Meat & Seafood"], ["veal","Meat & Seafood"], ["duck","Meat & Seafood"], ["brisket","Meat & Seafood"],
+  ["rib roast","Meat & Seafood"], ["picanha","Meat & Seafood"],
+  ["milk","Dairy & Eggs"], ["cream","Dairy & Eggs"], ["buttermilk","Dairy & Eggs"], ["yogurt","Dairy & Eggs"],
+  ["butter","Dairy & Eggs"], ["egg","Dairy & Eggs"], ["cheese","Dairy & Eggs"], ["parmesan","Dairy & Eggs"],
+  ["mozzarella","Dairy & Eggs"], ["ricotta","Dairy & Eggs"], ["feta","Dairy & Eggs"], ["cheddar","Dairy & Eggs"],
+  ["mascarpone","Dairy & Eggs"], ["provolone","Dairy & Eggs"], ["gruyere","Dairy & Eggs"], ["brie","Dairy & Eggs"],
+  ["bread","Bread & Bakery"], ["baguette","Bread & Bakery"], ["tortilla","Bread & Bakery"], ["pita","Bread & Bakery"],
+  ["bun","Bread & Bakery"], ["roll","Bread & Bakery"], ["naan","Bread & Bakery"], ["pizza dough","Bread & Bakery"],
+  ["cornbread","Bread & Bakery"], ["biscuit","Bread & Bakery"],
+  ["salt","Herbs & Spices"], ["paprika","Herbs & Spices"], ["cumin","Herbs & Spices"], ["cinnamon","Herbs & Spices"],
+  ["nutmeg","Herbs & Spices"], ["turmeric","Herbs & Spices"], ["allspice","Herbs & Spices"], ["dried","Herbs & Spices"],
+  ["spice","Herbs & Spices"], ["seasoning","Herbs & Spices"], ["zest","Herbs & Spices"],
+  ["wine","Beverages"], ["beer","Beverages"], ["juice","Beverages"], ["soda","Beverages"],
+  ["sparkling water","Beverages"], ["cognac","Beverages"], ["brandy","Beverages"], ["liqueur","Beverages"],
+  ["rum","Beverages"], ["vodka","Beverages"], ["whiskey","Beverages"], ["bourbon","Beverages"],
+  ["flour","Pantry & Dry Goods"], ["sugar","Pantry & Dry Goods"], ["rice","Pantry & Dry Goods"], ["pasta","Pantry & Dry Goods"],
+  ["noodle","Pantry & Dry Goods"], ["orzo","Pantry & Dry Goods"], ["spaghetti","Pantry & Dry Goods"], ["penne","Pantry & Dry Goods"],
+  ["gnocchi","Pantry & Dry Goods"], ["bean","Pantry & Dry Goods"], ["lentil","Pantry & Dry Goods"], ["chickpea","Pantry & Dry Goods"],
+  ["farro","Pantry & Dry Goods"], ["quinoa","Pantry & Dry Goods"], ["oat","Pantry & Dry Goods"], ["cornmeal","Pantry & Dry Goods"],
+  ["cornstarch","Pantry & Dry Goods"], ["baking powder","Pantry & Dry Goods"], ["baking soda","Pantry & Dry Goods"],
+  ["yeast","Pantry & Dry Goods"], ["chocolate","Pantry & Dry Goods"], ["cocoa","Pantry & Dry Goods"], ["nut","Pantry & Dry Goods"],
+  ["almond","Pantry & Dry Goods"], ["walnut","Pantry & Dry Goods"], ["pecan","Pantry & Dry Goods"], ["pistachio","Pantry & Dry Goods"],
+  ["cashew","Pantry & Dry Goods"], ["peanut","Pantry & Dry Goods"], ["sesame seed","Pantry & Dry Goods"], ["canned","Pantry & Dry Goods"],
+  ["can of","Pantry & Dry Goods"], ["gelatin","Pantry & Dry Goods"], ["honey","Condiments, Oils & Sauces"], ["water","Other"],
+];
+
+function classifyAisle(name){
+  const n = " " + (name||"").toLowerCase() + " ";
+  for(const [phrase, aisle] of AISLE_KEYWORDS){
+    if(!aisle) continue;
+    if(n.includes(phrase.toLowerCase())) return aisle;
+  }
+  return "Other";
+}
+
+// ---- favorites state (persisted to localStorage where available) ----
+const FAVORITES_KEY = "cookbook_favorites_v1";
+
+function loadFavorites(){
+  try{
+    const raw = localStorage.getItem(FAVORITES_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e){ return {}; }
+}
+function saveFavorites(){
+  try{ localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites)); }
+  catch(e){ /* storage unavailable (e.g. some browsers restrict it for file:// pages) - favorites still work for this session */ }
+}
+let favorites = loadFavorites(); // { [slug]: true }
+
+function isFavorite(slug){ return !!favorites[slug]; }
+function toggleFavorite(slug){
+  if(favorites[slug]) delete favorites[slug];
+  else favorites[slug] = true;
+  saveFavorites();
+  renderSidebar();
+}
+function starSvg(filled){
+  return `<svg width="18" height="18" viewBox="0 0 24 24" fill="${filled?"currentColor":"none"}" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+}
+
+function categoryLabel(c){
+  return c.replace(/-/g," ").replace(/\b\w/g, m => m.toUpperCase());
+}
+
+function matchesSearch(r, term){
+  if(!term) return true;
+  const hay = [
+    r.title, r.category, r.cuisine || "",
+    (r.tags||[]).join(" "), (r.diet||[]).join(" "),
+    (r.ingredients||[]).map(i=>i.text||i.raw).join(" ")
+  ].join(" ").toLowerCase();
+  return hay.includes(term.toLowerCase());
+}
+
+function renderSidebar(){
+  const wrap = document.getElementById("categoryNav");
+  const counts = {};
+  RECIPES.forEach(r => { counts[r.category] = (counts[r.category]||0) + 1; });
+  const favCount = RECIPES.filter(r => isFavorite(r.slug)).length;
+  const items = [
+    ["all","All Recipes",RECIPES.length],
+    ["__favorites__","★ Favorites",favCount],
+    ...CATEGORIES.map(c => [c, categoryLabel(c), counts[c]||0])
+  ];
+  wrap.innerHTML = items.map(([key,label,count]) => `
+    <div class="nav-item ${key===activeCategory?"active":""}" data-cat="${key}">
+      <span>${label}</span><span class="count">${count}</span>
+    </div>
+  `).join("");
+  wrap.querySelectorAll(".nav-item").forEach(item=>{
+    item.addEventListener("click", ()=>{
+      activeCategory = item.dataset.cat;
+      // A category click always opens that category's recipes, even if a
+      // search keyword is currently typed in - clear the search so it
+      // can't hide recipes that belong to the clicked category.
+      searchTerm = "";
+      const searchBox = document.getElementById("searchInput");
+      if(searchBox) searchBox.value = "";
+      if(location.hash){ location.hash = ""; } // return to the browse grid if a recipe detail page was open
+      renderSidebar();
+      renderGrid();
+      route();
+    });
+  });
+}
+
+function photoFallbackTag(r){
+  if(!r.image_is_fallback) return "";
+  const label = r.image_fallback_title ? `Photo from a similar recipe: ${r.image_fallback_title}` : "Photo of a similar recipe";
+  return `<span class="photo-fallback-tag" title="This recipe doesn't have its own verified photo yet, so it's showing a photo borrowed from a related recipe in the cookbook.">${label}</span>`;
+}
+
+function thumbHtml(r){
+  const badge = r.incomplete ? '<span class="badge-incomplete">Needs source</span>' : '';
+  const initials = r.title.split(" ").map(w=>w[0]).slice(0,2).join("");
+  const fav = isFavorite(r.slug);
+  const favBtn = `<button class="fav-btn${fav?" active":""}" data-slug="${r.slug}" type="button" title="${fav?"Remove from favorites":"Add to favorites"}">${starSvg(fav)}</button>`;
+  const imgTag = r.image ? `<img class="thumb-img" src="${r.image}" alt="${r.title}" referrerpolicy="no-referrer" loading="lazy" onerror="this.remove()">` : "";
+  return `<div class="thumb">${badge}${favBtn}<span class="thumb-initials">${initials}</span>${imgTag}${photoFallbackTag(r)}</div>`;
+}
+
+function renderGrid(){
+  const grid = document.getElementById("recipeGrid");
+  const filtered = RECIPES.filter(r =>
+    (activeCategory==="all" || (activeCategory==="__favorites__" ? isFavorite(r.slug) : r.category===activeCategory)) && matchesSearch(r, searchTerm)
+  );
+  const emptyState = document.getElementById("emptyState");
+  emptyState.style.display = filtered.length ? "none" : "block";
+  if(!filtered.length){
+    emptyState.innerHTML = activeCategory === "__favorites__"
+      ? `<div class="big">No favorites yet</div><div>Click the star on any recipe card (or on a recipe's page) to add it here.</div>`
+      : `<div class="big">No matches</div><div>No recipes match that search yet.</div>`;
+  }
+  grid.innerHTML = filtered.map(r => `
+    <div class="card" data-slug="${r.slug}">
+      ${thumbHtml(r)}
+      <div class="body">
+        <div class="cat">${categoryLabel(r.category)}</div>
+        <h3>${r.title}</h3>
+        <div class="tags">${(r.tags||[]).filter(t=>t!=="UNVERIFIED").slice(0,3).map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+        <div class="facts">
+          ${r.total_time_minutes ? `<span>${r.total_time_minutes} min</span>` : ""}
+          ${r.servings ? `<span>${r.servings} servings</span>` : ""}
+        </div>
+      </div>
+    </div>
+  `).join("");
+  grid.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("click", ()=> location.hash = "#recipe/" + card.dataset.slug);
+  });
+  grid.querySelectorAll(".fav-btn").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      toggleFavorite(btn.dataset.slug);
+      renderGrid();
+    });
+  });
+}
+
+function renderMissingInfo(text){
+  if(!text) return "";
+  const items = text.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>l.replace(/^-\s*\[.\]\s*/,"").replace(/^-\s*/,""));
+  return `<div class="missing-info-box"><h4>Still needed for this recipe — paste it in the chat to complete:</h4><ul>${items.map(i=>`<li>☐ ${i}</li>`).join("")}</ul></div>`;
+}
+
+// ---- top-of-page facts: prep/cook/total always show a value or "N.A.",
+// difficulty renders as a three-level icon (Easy/Moderate/Hard) or "N.A." ----
+function factString(v){
+  return (v===null || v===undefined) ? "N.A." : `${v} min`;
+}
+
+function difficultyMeterHtml(r){
+  const level = r.difficulty_level;
+  const label = r.difficulty_label;
+  if(!level){
+    return `<span class="difficulty-meter"><span class="diff-text">${label || "N.A."}</span></span>`;
+  }
+  const bars = [1,2,3].map(n => `<span class="bar b${n}${n<=level?` filled level-${level}`:""}"></span>`).join("");
+  return `<span class="difficulty-meter" title="Difficulty: ${label}"><span class="bars">${bars}</span><span class="diff-text">${label}</span></span>`;
+}
+
+// The source URL sits right below the description and must always be a
+// clickable link when one is on file; otherwise it says so plainly (N.A.).
+function sourceLineHtml(r){
+  if(!r.source_url) return "Source: N.A. (not recorded).";
+  return `Source: <a href="${r.source_url}" target="_blank" rel="noopener">${r.source_title||r.source_url}</a>${r.source_author?` by ${r.source_author}`:""}`;
+}
+
+// Prompt text for the "copy a prompt" button at the bottom of a recipe -
+// paste-ready for chat, matching the trigger phrasing in
+// _cookbook-meta-prompt.md §6b (completing a partial recipe) or a general
+// correction if the recipe is already complete.
+function regenPromptText(r){
+  if(r.incomplete){
+    return `Here's the missing info for ${r.md_path} ("${r.title}"): [paste your details here]`;
+  }
+  return `Please update ${r.md_path} ("${r.title}") with this correction: [describe the change]`;
+}
+
+// ---- fraction formatting for scaled quantities ----
+function formatQty(v){
+  if(v===null || v===undefined) return "";
+  const whole = Math.floor(v);
+  const frac = v - whole;
+  const fractions = [[0.125,"1/8"],[0.25,"1/4"],[0.333,"1/3"],[0.5,"1/2"],[0.667,"2/3"],[0.75,"3/4"]];
+  let best = null, bestDiff = 999;
+  for(const [val,label] of fractions){
+    const d = Math.abs(frac-val);
+    if(d < bestDiff){ bestDiff = d; best = label; }
+  }
+  if(frac < 0.06) return whole===0 ? "0" : String(whole);
+  if(bestDiff < 0.06){
+    return whole>0 ? `${whole} ${best}` : best;
+  }
+  return (Math.round(v*100)/100).toString();
+}
+
+const PLURALIZABLE_UNITS = ["tablespoon","teaspoon","cup","pound","clove","slice","pinch","dash","can","fillet","sprig","bunch","ounce"];
+function pluralizeUnit(unit, scaledValue){
+  if(!unit) return unit;
+  const isPlural = scaledValue > 1.06;
+  const base = unit.replace(/s$/,"");
+  if(!PLURALIZABLE_UNITS.includes(base)) return unit; // abbreviations (tbsp, tsp, oz, g, kg, ml, l...) don't inflect
+  return isPlural ? base + "s" : base;
+}
+
+// Single source of truth for the quantity math, shared by the recipe-detail
+// ingredient list and the shopping-list view so the two can never diverge.
+function computeQtyStrings(ing, factor){
+  if(ing.qty===null) return { primaryStr:"-", secondaryStr:"" };
+
+  let primaryStr;
+  if(ing.metric_qty !== null && ing.metric_unit){
+    const scaledMetric = ing.metric_qty * factor;
+    const displayVal = scaledMetric < 10 ? Math.round(scaledMetric*10)/10 : Math.round(scaledMetric);
+    primaryStr = `${displayVal} ${ing.metric_unit}`;
+  } else {
+    const scaled = ing.qty * factor;
+    const unit = pluralizeUnit(ing.unit, scaled);
+    primaryStr = `${formatQty(scaled)}${unit ? " "+unit : ""}`;
+  }
+
+  let secondaryStr = "";
+  if(ing.us_qty !== null && ing.us_unit){
+    const scaledUs = ing.us_qty * factor;
+    const usUnit = pluralizeUnit(ing.us_unit, scaledUs);
+    secondaryStr = `(${formatQty(scaledUs)}${usUnit ? " "+usUnit : ""})`;
+  }
+  return { primaryStr, secondaryStr };
+}
+
+function ingredientLine(ing, factor){
+  const name = ing.qty===null ? ing.raw : ing.text;
+  const { primaryStr, secondaryStr } = computeQtyStrings(ing, factor);
+  return `<li><span class="qty">${primaryStr}</span><span class="qty-secondary">${secondaryStr}</span><span class="ing-name">${name}</span></li>`;
+}
+
+function shoppingItemLine(ing, factor, slug, idx, checked){
+  const name = ing.qty===null ? ing.raw : ing.text;
+  const { primaryStr, secondaryStr } = computeQtyStrings(ing, factor);
+  return `<li class="${checked?"checked":""}"><input type="checkbox" data-slug="${slug}" data-idx="${idx}" ${checked?"checked":""}><span class="qty">${primaryStr}</span><span class="qty-secondary">${secondaryStr}</span><span class="ing-name">${name}</span></li>`;
+}
+
+// ---- shopping list actions ----
+function updateShoppingBadge(){
+  const badge = document.getElementById("shoppingBadge");
+  if(!badge) return;
+  const count = Object.keys(shoppingList).length;
+  badge.textContent = String(count);
+  badge.style.display = count ? "inline-block" : "none";
+}
+
+function showToast(msg){
+  let el = document.getElementById("toast");
+  if(!el){
+    el = document.createElement("div");
+    el.id = "toast";
+    el.className = "toast";
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> el.classList.remove("show"), 2200);
+}
+
+function addRecipeToShoppingList(slug, servings){
+  shoppingList[slug] = { servings: servings || null, checked: (shoppingList[slug] && shoppingList[slug].checked) || {} };
+  saveShoppingList();
+  updateShoppingBadge();
+  showToast("Added to shopping list");
+}
+
+function removeRecipeFromShoppingList(slug){
+  delete shoppingList[slug];
+  saveShoppingList();
+  updateShoppingBadge();
+  if(location.hash === "#shopping-list") renderShoppingList();
+}
+
+function toggleShoppingItem(slug, idx){
+  if(!shoppingList[slug]) return;
+  shoppingList[slug].checked[idx] = !shoppingList[slug].checked[idx];
+  saveShoppingList();
+}
+
+function clearShoppingList(){
+  shoppingList = {};
+  saveShoppingList();
+  updateShoppingBadge();
+  renderShoppingList();
+}
+
+// Flattens the shopping list into one array of individual ingredient
+// entries - never merges quantities across recipes (each entry keeps its
+// own slug/index so checkboxes and traceability work exactly as before).
+// Shared by the "By Aisle" on-screen view, the print-only view, and the
+// "Copy to clipboard" text, so aisle classification only happens in one
+// place.
+function buildFlatShoppingItems(slugs){
+  const out = [];
+  slugs.forEach(slug=>{
+    const r = RECIPES.find(x=>x.slug===slug);
+    if(!r) return;
+    const entry = shoppingList[slug];
+    const factor = (r.servings && entry.servings) ? (entry.servings / r.servings) : 1;
+    (r.ingredients||[]).forEach((ing, idx)=>{
+      const name = ing.qty===null ? ing.raw : ing.text;
+      const { primaryStr, secondaryStr } = computeQtyStrings(ing, factor);
+      out.push({
+        slug, idx, checked: !!entry.checked[idx],
+        recipeTitle: r.title,
+        servingsLabel: entry.servings ? `${entry.servings} servings` : "",
+        name, primaryStr, secondaryStr,
+        aisle: classifyAisle(name),
+      });
+    });
+  });
+  return out;
+}
+
+// Groups a flat item array by aisle, in AISLE_ORDER, dropping empty aisles.
+function groupItemsByAisle(items){
+  const bySection = {};
+  items.forEach(it=>{ (bySection[it.aisle] = bySection[it.aisle] || []).push(it); });
+  return AISLE_ORDER.filter(a => bySection[a] && bySection[a].length).map(a => [a, bySection[a]]);
+}
+
+function aisleItemLine(it){
+  const sourceTag = `<span class="item-source">${it.recipeTitle}${it.servingsLabel ? ` (${it.servingsLabel})` : ""}</span>`;
+  return `<li class="${it.checked?"checked":""}"><input type="checkbox" data-slug="${it.slug}" data-idx="${it.idx}" ${it.checked?"checked":""}><span class="qty">${it.primaryStr}</span><span class="qty-secondary">${it.secondaryStr}</span><span class="ing-name">${it.name}${sourceTag}</span></li>`;
+}
+
+function shoppingListPlainText(){
+  const slugs = Object.keys(shoppingList);
+  if(!slugs.length) return "Shopping list is empty.";
+  // Flat, single checklist (no card boxes, no sidebar/toolbar) that pastes
+  // cleanly into Word, Notes, or any plain-text app - grouped the same way
+  // the on-screen view currently is (by aisle, the default, or by recipe),
+  // with a plain-text label above each group so every item's source/section
+  // stays identifiable. Quantities are still never merged across recipes.
+  const items = buildFlatShoppingItems(slugs);
+  const lines = [`Shopping List - generated ${new Date().toISOString().slice(0,10)}`, ""];
+  if(groupBy === "aisle"){
+    groupItemsByAisle(items).forEach(([aisle, its])=>{
+      lines.push(aisle);
+      its.forEach(it=> lines.push(`- ${it.primaryStr}${it.secondaryStr?" "+it.secondaryStr:""} ${it.name} (${it.recipeTitle})`));
+      lines.push("");
+    });
+  } else {
+    slugs.forEach(slug=>{
+      const its = items.filter(it=>it.slug===slug);
+      if(!its.length) return;
+      lines.push(`${its[0].recipeTitle}${its[0].servingsLabel ? ` (${its[0].servingsLabel})` : ""}`);
+      its.forEach(it=> lines.push(`- ${it.primaryStr}${it.secondaryStr?" "+it.secondaryStr:""} ${it.name}`));
+      lines.push("");
+    });
+  }
+  return lines.join("\n").trim();
+}
+
+// Builds the completely separate, flat, print-only version of the list
+// (no sidebar, no header, no toolbar, no card boxes) - shown only via
+// @media print while the shopping-list route is active (see
+// body.route-shopping-list in the CSS). Groups match whatever the
+// on-screen view is currently showing (aisle or recipe), each with a plain
+// text label (no box, no "Remove recipe" link, no button) directly above
+// its items so every ingredient's source/section stays identifiable.
+function renderShoppingListPrintView(slugs){
+  const printView = document.getElementById("shoppingListPrintView");
+  if(!printView) return;
+  if(!slugs.length){ printView.innerHTML = ""; return; }
+  const items = buildFlatShoppingItems(slugs);
+  let bodyHtml;
+  if(groupBy === "aisle"){
+    bodyHtml = groupItemsByAisle(items).map(([aisle, its])=>{
+      const lis = its.map(it=>`<li>&#9744; <span class="pqty">${it.primaryStr}</span><span class="pqty2">${it.secondaryStr}</span><span>${it.name} <span class="psource">(${it.recipeTitle})</span></span></li>`).join("");
+      return `<li class="precipe">${aisle}</li>${lis}`;
+    }).join("");
+  } else {
+    bodyHtml = slugs.map(slug=>{
+      const its = items.filter(it=>it.slug===slug);
+      if(!its.length) return "";
+      const label = its[0].servingsLabel ? ` (${its[0].servingsLabel})` : "";
+      const lis = its.map(it=>`<li>&#9744; <span class="pqty">${it.primaryStr}</span><span class="pqty2">${it.secondaryStr}</span><span>${it.name}</span></li>`).join("");
+      return `<li class="precipe">${its[0].recipeTitle}${label}</li>${lis}`;
+    }).join("");
+  }
+  printView.innerHTML = `<h2>Shopping List</h2><ul>${bodyHtml}</ul>`;
+}
+
+function renderShoppingList(){
+  const view = document.getElementById("shoppingListView");
+  const slugs = Object.keys(shoppingList);
+  renderShoppingListPrintView(slugs);
+  if(!slugs.length){
+    view.innerHTML = `
+      <div class="empty">
+        <div class="big">Your shopping list is empty</div>
+        <div>Open a recipe and click "+ Add to Shopping List" to build one.</div>
+      </div>`;
+    return;
+  }
+
+  let bodyHtml, noteHtml;
+  if(groupBy === "aisle"){
+    const items = buildFlatShoppingItems(slugs);
+    bodyHtml = groupItemsByAisle(items).map(([aisle, its])=> `
+      <div class="shop-group aisle-group">
+        <div class="shop-group-head aisle-group-head">
+          <h3>${aisle}</h3><span class="aisle-count">${its.length} item${its.length===1?"":"s"}</span>
+        </div>
+        <ul class="shopping-items">${its.map(aisleItemLine).join("")}</ul>
+      </div>`).join("");
+    noteHtml = `Grouped by grocery-store section (produce, meat &amp; seafood, dairy, pantry, and so on) so you can shop each section once - whether that's walking the store in one pass or adding items to an online cart in order. Sections are assigned by a simple keyword match, not a guaranteed lookup, so double-check anything that lands somewhere unexpected. Every item still shows the recipe it came from, and quantities are never merged across recipes. Switch to "By Recipe" for the traditional grouped view.`;
+  } else {
+    bodyHtml = slugs.map(slug=>{
+      const r = RECIPES.find(x=>x.slug===slug);
+      if(!r) return "";
+      const entry = shoppingList[slug];
+      const factor = (r.servings && entry.servings) ? (entry.servings / r.servings) : 1;
+      const items = (r.ingredients||[]).map((ing,idx)=> shoppingItemLine(ing, factor, slug, idx, !!entry.checked[idx])).join("");
+      return `
+        <div class="shop-group">
+          <div class="shop-group-head">
+            <h3>${r.title}${entry.servings ? ` <span style="color:var(--ink-soft);font-weight:400;font-size:.85rem">(${entry.servings} servings)</span>` : ""}</h3>
+            <span class="remove-link" data-remove="${slug}">Remove recipe</span>
+          </div>
+          <ul class="shopping-items">${items || '<li style="grid-template-columns:1fr"><span class="ing-name">No ingredient list available for this recipe yet.</span></li>'}</ul>
+        </div>`;
+    }).join("");
+    noteHtml = `Ingredients are grouped by recipe rather than merged into one combined total, since the same-sounding ingredient can mean different things across recipes (e.g. bread flour vs. all-purpose, or lemon juice measured by volume vs. by fruit) - merging them automatically risked showing you an incorrect combined amount. Switch to "By Aisle" to shop by grocery-store section instead.`;
+  }
+
+  view.innerHTML = `
+    <h2 style="margin-bottom:16px">Shopping List</h2>
+    <div class="list-toolbar">
+      <div class="groupby-toggle" role="group" aria-label="Group shopping list by">
+        <button class="${groupBy==='aisle'?'active':''}" id="groupByAisleBtn" type="button">By Aisle</button>
+        <button class="${groupBy==='recipe'?'active':''}" id="groupByRecipeBtn" type="button">By Recipe</button>
+      </div>
+      <button id="printListBtn">Print list</button>
+      <button class="secondary" id="copyListBtn">Copy to clipboard</button>
+      <button class="danger" id="clearListBtn">Clear list</button>
+    </div>
+    <div class="list-note">${noteHtml}</div>
+    ${bodyHtml}
+  `;
+
+  const aisleBtn = document.getElementById("groupByAisleBtn");
+  if(aisleBtn) aisleBtn.addEventListener("click", ()=> setGroupBy("aisle"));
+  const recipeBtn = document.getElementById("groupByRecipeBtn");
+  if(recipeBtn) recipeBtn.addEventListener("click", ()=> setGroupBy("recipe"));
+
+  const printBtn = document.getElementById("printListBtn");
+  if(printBtn) printBtn.addEventListener("click", ()=> window.print());
+
+  const copyBtn = document.getElementById("copyListBtn");
+  if(copyBtn) copyBtn.addEventListener("click", ()=>{
+    const text = shoppingListPlainText();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text)
+        .then(()=> showToast("Copied to clipboard"))
+        .catch(()=> showToast("Could not copy automatically - select and copy the list manually"));
+    } else {
+      showToast("Clipboard not available in this browser - select and copy the list manually");
+    }
+  });
+
+  const clearBtn = document.getElementById("clearListBtn");
+  if(clearBtn) clearBtn.addEventListener("click", ()=>{
+    if(confirm("Clear the entire shopping list?")) clearShoppingList();
+  });
+
+  view.querySelectorAll("[data-remove]").forEach(el=>{
+    el.addEventListener("click", ()=> removeRecipeFromShoppingList(el.dataset.remove));
+  });
+  view.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener("change", ()=>{
+      toggleShoppingItem(cb.dataset.slug, Number(cb.dataset.idx));
+      cb.closest("li").classList.toggle("checked", cb.checked);
+    });
+  });
+}
+
+function renderDetail(slug){
+  const r = RECIPES.find(x=>x.slug===slug);
+  const content = document.getElementById("detailContent");
+  if(!r){
+    content.innerHTML = `<div class="detail-body"><p>Recipe not found.</p></div>`;
+    return;
+  }
+  currentServings[slug] = currentServings[slug] || r.servings || null;
+
+  const heroImg = r.image ? `<img src="${r.image}" alt="${r.title}" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">` : "";
+  const hasIngredients = r.ingredients && r.ingredients.length > 0;
+  const hasInstructions = r.instructions && r.instructions.length > 0;
+
+  content.innerHTML = `
+    <div class="hero">
+      ${heroImg}
+      ${photoFallbackTag(r)}
+      <div class="overlay">
+        <div class="cat">${categoryLabel(r.category)}${r.cuisine ? " - "+r.cuisine : ""}</div>
+        <div class="detail-title-row">
+          <h2>${r.title}</h2>
+          <button class="fav-btn-detail${isFavorite(slug)?" active":""}" id="favDetailBtn" type="button">${starSvg(isFavorite(slug))}<span>${isFavorite(slug)?"Favorited":"Add to Favorites"}</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="top-info">
+        <div class="stat-box">
+          <div class="fact"><span class="label">Prep</span><span class="value">${factString(r.prep_time_minutes)}</span></div>
+          <div class="fact"><span class="label">Cook</span><span class="value">${factString(r.cook_time_minutes)}</span></div>
+          <div class="fact"><span class="label">Total</span><span class="value">${factString(r.total_time_minutes)}</span></div>
+          <div class="fact"><span class="label">Difficulty</span><span class="value">${difficultyMeterHtml(r)}</span></div>
+        </div>
+        <div class="description-wrap">
+          ${r.description ? `<p class="description">${r.description}</p>` : `<p class="description description-na">N.A. — no description recorded yet.</p>`}
+          <div class="source-line">${sourceLineHtml(r)}</div>
+        </div>
+      </div>
+      ${(r.diet && r.diet.length) ? `<div class="diet-tags">${r.diet.map(d=>`<span class="tag">${d}</span>`).join("")}</div>` : ""}
+
+      <div class="section">
+        <h3>Ingredients</h3>
+        ${hasIngredients ? `<button class="add-to-list-btn" id="addToListBtn" type="button">+ Add to Shopping List</button>` : ""}
+        ${(hasIngredients && r.servings) ? `
+        <div class="servings-control">
+          <button id="minusBtn">-</button>
+          <span class="count"><span id="servingsCount">${currentServings[slug]}</span> servings</span>
+          <button id="plusBtn">+</button>
+        </div>` : ""}
+        ${hasIngredients ? `<ul class="ingredients" id="ingredientsList"></ul>` : `<div class="missing-box">No ingredient list available yet for this recipe.</div>`}
+      </div>
+
+      <div class="section">
+        <h3>Instructions</h3>
+        ${hasInstructions ? `<ol class="steps">${r.instructions.map(s=>`<li>${s}</li>`).join("")}</ol>` : `<div class="missing-box">No step-by-step instructions available yet for this recipe.</div>`}
+      </div>
+
+      ${r.cooks_notes ? `<div class="section"><h3>Cook's Notes &amp; Tips</h3><div class="notes-box">${r.cooks_notes}</div></div>` : ""}
+      ${(r.my_notes && !/^_\(none yet\)_$/.test(r.my_notes) && r.my_notes.trim()) ? `<div class="section"><h3>My Notes</h3><div class="notes-box">${r.my_notes}</div></div>` : ""}
+
+      <button onclick="window.print()" style="margin-top:10px;background:var(--fern);color:#fff;border:none;padding:10px 20px;border-radius:999px;cursor:pointer;font-size:.95rem;">Print recipe</button>
+
+      ${r.incomplete ? `<div class="incomplete-banner" style="margin-top:24px"><strong>This recipe is incomplete.</strong> Its source could not be fully read, so exact quantities and/or steps above may be missing rather than broken.</div>` : ""}
+      ${r.missing_info ? renderMissingInfo(r.missing_info) : ""}
+
+      <div class="regen-box">
+        <h4>Fix or complete this recipe</h4>
+        <p>Open the source Markdown file to edit it directly, or copy a ready-made prompt and paste it in chat so Claude can update ${r.md_path} for you.</p>
+        <div class="regen-actions">
+          <a href="${r.md_path}" target="_blank" rel="noopener">Open recipe file (.md)</a>
+          <button id="copyPromptBtn" type="button">Copy prompt to paste in chat</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  function drawIngredients(){
+    if(!hasIngredients) return;
+    const factor = r.servings ? (currentServings[slug] / r.servings) : 1;
+    document.getElementById("ingredientsList").innerHTML = r.ingredients.map(i => ingredientLine(i, factor)).join("");
+    const sc = document.getElementById("servingsCount");
+    if(sc) sc.textContent = currentServings[slug];
+  }
+  drawIngredients();
+
+  const minus = document.getElementById("minusBtn");
+  const plus = document.getElementById("plusBtn");
+  if(minus && plus){
+    minus.addEventListener("click", ()=>{
+      if(currentServings[slug] > 1){ currentServings[slug]--; drawIngredients(); }
+    });
+    plus.addEventListener("click", ()=>{
+      currentServings[slug]++; drawIngredients();
+    });
+  }
+
+  const addBtn = document.getElementById("addToListBtn");
+  if(addBtn){
+    addBtn.addEventListener("click", ()=>{
+      addRecipeToShoppingList(slug, currentServings[slug] || r.servings || null);
+    });
+  }
+
+  const favBtn = document.getElementById("favDetailBtn");
+  if(favBtn){
+    favBtn.addEventListener("click", ()=>{
+      toggleFavorite(slug);
+      renderDetail(slug);
+    });
+  }
+
+  const copyPromptBtn = document.getElementById("copyPromptBtn");
+  if(copyPromptBtn){
+    copyPromptBtn.addEventListener("click", ()=>{
+      const text = regenPromptText(r);
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text)
+          .then(()=> showToast("Prompt copied — paste it in chat"))
+          .catch(()=> showToast("Could not copy automatically - select and copy the prompt manually"));
+      } else {
+        showToast("Clipboard not available in this browser - select and copy the prompt manually");
+      }
+    });
+  }
+}
+
+function route(){
+  const hash = location.hash;
+  document.getElementById("browseView").style.display = "none";
+  document.getElementById("detailView").style.display = "none";
+  document.getElementById("shoppingListView").style.display = "none";
+  document.body.classList.remove("route-shopping-list");
+
+  if(hash.startsWith("#recipe/")){
+    const slug = hash.replace("#recipe/","");
+    document.getElementById("detailView").style.display = "block";
+    renderDetail(slug);
+    window.scrollTo(0,0);
+  } else if(hash === "#shopping-list"){
+    document.getElementById("shoppingListView").style.display = "block";
+    document.body.classList.add("route-shopping-list");
+    renderShoppingList();
+    window.scrollTo(0,0);
+  } else {
+    document.getElementById("browseView").style.display = "block";
+  }
+}
+
+document.getElementById("backLink").addEventListener("click", ()=> location.hash = "");
+document.getElementById("searchInput").addEventListener("input", (e)=>{
+  searchTerm = e.target.value;
+  // Search always applies to the full recipe library, not whatever category
+  // or Favorites filter happens to be active - so typing a keyword always
+  // switches back to "All Recipes" rather than silently searching within a
+  // narrower, currently-selected group.
+  activeCategory = "all";
+  renderSidebar();
+  if(location.hash){ location.hash = ""; } // return to the browse grid so search results are visible if a recipe detail page was open
+  renderGrid();
+  route();
+});
+document.getElementById("shoppingBtn").addEventListener("click", ()=> location.hash = "#shopping-list");
+window.addEventListener("hashchange", route);
+
+try {
+  renderSidebar();
+  renderGrid();
+  updateShoppingBadge();
+  route();
+} catch(e) {
+  showErrorBanner(e.message + "\n" + (e.stack||""));
+}
+</script>
+</body>
+</html>
