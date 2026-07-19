@@ -1449,20 +1449,21 @@ function renderDetail(slug){
 
   const stepPrev = document.getElementById("stepPrev");
   const stepNext = document.getElementById("stepNext");
-  function scrollToSteps(){
-    const listEl = document.querySelector("#detailContent ol.steps");
-    if(listEl) window.scrollTo({top: listEl.getBoundingClientRect().top + window.scrollY - 80, behavior:"smooth"});
-  }
+  // Deliberately no auto-scroll here. .step-nav (the Prev/Next buttons) sits
+  // directly above the <ol>, so it never moves when the active step changes
+  // - only content further down can reflow as steps of different lengths
+  // swap in. An earlier version scrolled the page to bring the <ol>'s top
+  // into view on every click, which instead pushed .step-nav itself above
+  // the visible viewport (since it sits above the scroll target), forcing
+  // the user to hunt for the Prev/Next buttons again after every tap.
   if(stepPrev) stepPrev.addEventListener("click", ()=>{
     currentStep[slug] = Math.max(0, (currentStep[slug]||0) - 1);
     updateStepView();
-    scrollToSteps();
   });
   if(stepNext) stepNext.addEventListener("click", ()=>{
     const items = document.querySelectorAll("#detailContent ol.steps li");
     currentStep[slug] = Math.min(items.length - 1, (currentStep[slug]||0) + 1);
     updateStepView();
-    scrollToSteps();
   });
 
   const cookModeBtn = document.getElementById("cookModeBtn");
