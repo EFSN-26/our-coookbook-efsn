@@ -86,18 +86,22 @@
   .sidebar{
     width:230px;flex-shrink:0;
     background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:18px 0;
+    box-shadow:var(--shadow);
     /* Stays in view while the recipe grid/detail page scrolls, pinned just
        below the sticky header - --header-h is measured and kept in sync by
        JS (updateHeaderHeightVar) since the header's real height depends on
-       font metrics and can't be reliably hardcoded. If it scrolls past the
-       header's own bottom edge before running out of category items, the
-       sidebar scrolls internally instead of running off the top of the
-       screen or overlapping the header. */
+       font metrics and can't be reliably hardcoded. Deliberately no
+       overflow/scrolling set on THIS element - some browsers mishandle
+       position:sticky on an element that also scrolls its own content, so
+       that job is delegated entirely to the nested .sidebar-scroll div
+       below instead of risking the two interacting on the same box. */
     position:sticky;
     top:calc(var(--header-h, 92px) + 20px);
     max-height:calc(100vh - var(--header-h, 92px) - 40px);
-    overflow-y:auto;
+    display:flex;
+  }
+  .sidebar-scroll{
+    flex:1;min-height:0;overflow-y:auto;padding:18px 0;
   }
   .sidebar h4{
     margin:0 18px 10px;font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;
@@ -532,7 +536,7 @@
   <div class="wrap header-row">
     <div class="titleblock">
       <h1>Our Cookbook</h1>
-      <div class="meta"><span id="recipeCount">184</span> recipes - last built 2026-07-19 13:50</div>
+      <div class="meta"><span id="recipeCount">184</span> recipes - last built 2026-07-19 13:57</div>
     </div>
     <div class="searchbar">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -547,8 +551,10 @@
 
 <div class="wrap layout">
   <aside class="sidebar">
-    <h4>Categories</h4>
-    <div id="categoryNav"></div>
+    <div class="sidebar-scroll">
+      <h4>Categories</h4>
+      <div id="categoryNav"></div>
+    </div>
   </aside>
 
   <main>
