@@ -11,46 +11,33 @@ link could open it. You already confirmed that's fine for this project.
 If that ever changes, revoke the token below and I can help move it to a
 private/password-protected option instead.
 
-## What I already did
+## Status: almost live
 
 - Added an app icon (green "OC" tile) and the Apple meta tags Safari
   looks for, in `_build/template.html`, so every future rebuild keeps them:
   https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios
 - Rebuilt `index.html` — all 184 recipes still there, nothing broken.
+- Pushed all 198 files (184 recipes + site) to your GitHub repo,
+  `github.com/EFSN-26/our-coookbook-efsn` — confirmed live on GitHub as
+  of 2026-07-19.
 
-## What you need to do (one-time, ~10 minutes)
+## One step left — you need to click one button
 
-### 1. Create a free GitHub account
-Skip if you already have one. Go to https://github.com/signup and follow
-the prompts (email, username, password). GitHub Pages hosting is free —
-official docs: https://docs.github.com/en/pages
+I can't flip this particular switch for you: GitHub's Pages *settings*
+page (as opposed to pushing code, which I already did) isn't reachable
+from where I run, so this last click has to happen in your own browser,
+logged into GitHub.
 
-### 2. Create a new repository
-- Go to https://github.com/new
-- Repository name: `our-cookbook-efsn` (or anything you like)
-- Keep it **Public**
-- Leave everything else as default, click **Create repository**
-- Don't add any files — you'll get an empty repo, which is what we want
+1. Go to: **https://github.com/EFSN-26/our-coookbook-efsn/settings/pages**
+2. Under "Build and deployment" → **Source**, choose **Deploy from a branch**
+3. Under "Branch", choose **main** and folder **/ (root)**, then **Save**
 
-### 3. Create an access token (so I can publish updates for you)
-This is a scoped key that only lets me push to this one repository —
-not your whole GitHub account.
-- Go to https://github.com/settings/personal-access-tokens/new
-- Token name: `our-cookbook-efsn-publish`
-- Expiration: 1 year (you can renew or revoke anytime from that same page)
-- Repository access: **Only select repositories** → choose `our-cookbook`
-- Permissions → Repository permissions → **Contents: Read and write**
-- Click **Generate token**, then copy the token (starts with `github_pat_`)
+GitHub will publish the site within a minute or two at:
+**https://efsn-26.github.io/our-coookbook-efsn/**
 
-### 4. Send me two things in chat
-- The token you just copied
-- The repo name (e.g. `yourusername/our-cookbook-efsn`)
+That's the link to use in the next step, and the one you'll bookmark.
 
-I'll then push the cookbook files, turn on GitHub Pages via GitHub's API
-(Settings → Pages, done for you), and give you back the live web address
-— something like `https://yourusername.github.io/our-cookbook/`.
-
-## 5. Add it to your Home Screen (iPhone/iPad)
+## Add it to your Home Screen (iPhone/iPad)
 
 Per Apple's official instructions
 (https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios):
