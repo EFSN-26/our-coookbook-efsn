@@ -87,6 +87,17 @@
     width:230px;flex-shrink:0;
     background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
     box-shadow:var(--shadow);padding:18px 0;
+    /* Stays in view while the recipe grid/detail page scrolls, pinned just
+       below the sticky header - --header-h is measured and kept in sync by
+       JS (updateHeaderHeightVar) since the header's real height depends on
+       font metrics and can't be reliably hardcoded. If it scrolls past the
+       header's own bottom edge before running out of category items, the
+       sidebar scrolls internally instead of running off the top of the
+       screen or overlapping the header. */
+    position:sticky;
+    top:calc(var(--header-h, 92px) + 20px);
+    max-height:calc(100vh - var(--header-h, 92px) - 40px);
+    overflow-y:auto;
   }
   .sidebar h4{
     margin:0 18px 10px;font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;
@@ -521,7 +532,7 @@
   <div class="wrap header-row">
     <div class="titleblock">
       <h1>Our Cookbook</h1>
-      <div class="meta"><span id="recipeCount">184</span> recipes - last built 2026-07-19 13:44</div>
+      <div class="meta"><span id="recipeCount">184</span> recipes - last built 2026-07-19 13:50</div>
     </div>
     <div class="searchbar">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1538,6 +1549,19 @@ document.getElementById("searchInput").addEventListener("input", (e)=>{
 });
 document.getElementById("shoppingBtn").addEventListener("click", ()=> location.hash = "#shopping-list");
 window.addEventListener("hashchange", route);
+
+// Keeps the sticky sidebar's offset in sync with the sticky header's real
+// rendered height (see .sidebar's position:sticky in the CSS) - the header
+// isn't a fixed pixel height across font sizes/zoom levels, so this is
+// measured rather than hardcoded, and re-measured on resize/orientation
+// change and once images/fonts have settled (the "load" event).
+function updateHeaderHeightVar(){
+  const header = document.querySelector("header.site");
+  if(header) document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px");
+}
+updateHeaderHeightVar();
+window.addEventListener("resize", updateHeaderHeightVar);
+window.addEventListener("load", updateHeaderHeightVar);
 
 document.getElementById("categorySheetBackdrop").addEventListener("click", closeCategorySheet);
 document.getElementById("categorySheetClose").addEventListener("click", closeCategorySheet);
