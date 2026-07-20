@@ -12,7 +12,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 
 ## Current recipes
 
-255 recipes across 17 categories. Recipes flagged ⚠️ incomplete/unverified are missing a detail the source didn't state (usually an exact time, servings count, or difficulty) — never a guessed value; open the file's "Missing Information" section to see exactly what's missing, or check the site for the same warning banner (shown at the bottom of the recipe page, below the Print Recipe button).
+266 recipes across 17 categories. Recipes flagged ⚠️ incomplete/unverified are missing a detail the source didn't state (usually an exact time, servings count, or difficulty) — never a guessed value; open the file's "Missing Information" section to see exactly what's missing, or check the site for the same warning banner (shown at the bottom of the recipe page, below the Print Recipe button).
 
 **Appetizers**
 - [Baked Brie with Honey, Walnuts, Figs, and Rosemary](recipes/appetizers/baked-brie-with-the-works.md) — 25 min, 4 servings
@@ -56,6 +56,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Cheesy Baked Polenta and Egg with Bacon](recipes/breakfast/cheesy-baked-polenta-and-egg-with-bacon.md) — 40 min, 2 servings
 - [Creamy Applesauce Oatmeal](recipes/breakfast/creamy-applesauce-oatmeal.md) — 5 min, 1 servings
 - [Honey Nut Granola](recipes/breakfast/honey-nut-granola.md) — 50 min, 8 servings
+- [Zucchini and Eggs Skillet Recipe](recipes/breakfast/zucchini-and-eggs-skillet.md) — 30 min, 2 servings
 
 **Desserts**
 - [Amazing Pecan Pie Cake](recipes/desserts/pecan-pie-cake.md) — 70 min, 12 servings
@@ -74,6 +75,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Spooky Sweet Potato Ghost Hand Pies](recipes/desserts/spooky-sweet-potato-ghost-hand-pies.md) — 80 min, 16 servings
 - [Swedish Apple Cake](recipes/desserts/swedish-apple-cake.md) — 60 min, 8 servings — ⚠️ incomplete/unverified
 - [Tiramisu](recipes/desserts/tiramisu.md) — details pending — ⚠️ incomplete/unverified
+- [Warm Peach Cake](recipes/desserts/warm-peach-cake.md) — 12 servings — ⚠️ incomplete/unverified
 
 **Dips & Spreads**
 - [Authentic Restaurant-Style Italian Bread Dipping Oil](recipes/dips-spreads/italian-bread-dipping-oil.md) — 5 min, 20 servings
@@ -102,8 +104,9 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Cotoletta alla Milanese](recipes/meat-mains/cotoletta-alla-milanese.md) — 4 servings — ⚠️ incomplete/unverified
 - [Herb Crusted Pork Tenderloin With Mushroom Gravy](recipes/meat-mains/herb-crusted-pork-tenderloin-with-mushroom-gravy.md) — 30 min, 6 servings
 - [Lamb Loin Chops](recipes/meat-mains/lamb-loin-chops.md) — 25 min, 3 servings
+- [Porchetta](recipes/meat-mains/porchetta.md) — details pending — ⚠️ incomplete/unverified
 - [Slow Cooker Lamb Shanks With Red Wine Gravy](recipes/meat-mains/slow-cooker-lamb-shanks-with-red-wine-gravy.md) — 530 min, 2 servings
-- [The Best Meatballs Ever! (Italian Polpette Recipe)](recipes/meat-mains/polpette-italian-meatballs-in-tomato-sauce.md) — 55 min, 4-6 servings
+- [The Best Meatballs Ever! (Italian Polpette Recipe)](recipes/meat-mains/polpette-italian-meatballs-in-tomato-sauce.md) — 55 min, "4-6" servings
 
 **Pasta**
 - [$1000 Baked Spaghetti Pasta Casserole](recipes/pasta/1000-baked-spaghetti-pasta-casserole.md) — 50 min, 6 servings
@@ -135,9 +138,9 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Spaghetti alla Puveriello (Poor Man's Spaghetti)](recipes/pasta/spaghetti-alla-puveriello-poor-mans-spaghetti.md) — 25 min, 2 servings
 - [Spinach Artichoke Stuffed Shells](recipes/pasta/spinach-artichoke-stuffed-shells.md) — 45 min, 8 servings
 - [Spinach with Fettuccine](recipes/pasta/fettuccine-and-spinach.md) — 20 min, 4 servings
-- [Spinach-And-Sun-Dried Tomato Pasta](recipes/pasta/spinach-sun-dried-tomato-pasta-with-chicken.md) — 20 min, 6-8 servings
+- [Spinach-And-Sun-Dried Tomato Pasta](recipes/pasta/spinach-sun-dried-tomato-pasta-with-chicken.md) — 20 min, "6-8" servings
 - [Tagliatelle al Limone (Lemon Sauce)](recipes/pasta/tagliatelle-al-limone.md) — details pending — ⚠️ incomplete/unverified
-- [Tagliatelle al Ragù](recipes/pasta/tagliatelle-al-ragu.md) — 180-300 min, 4 servings — ⚠️ incomplete/unverified
+- [Tagliatelle al Ragù](recipes/pasta/tagliatelle-al-ragu.md) — "180-300" min, 4 servings — ⚠️ incomplete/unverified
 - [Tagliatelle al Tartufo Truffle Sauce](recipes/pasta/tagliatelle-al-tartufo-truffle-sauce.md) — 30 min, 4 servings
 - [The Godfather's Sunday Gravy](recipes/pasta/godfathers-sunday-gravy.md) — 10 servings — ⚠️ incomplete/unverified
 - [This Creamy Lemon Rigatoni Is All I'm Making This Week for Dinner](recipes/pasta/creamy-lemon-cottage-cheese-rigatoni.md) — 30 min, 6 servings — ⚠️ incomplete/unverified
@@ -148,6 +151,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Apple Cider Chicken Thighs](recipes/poultry/apple-cider-chicken-thighs.md) — 40 min, 4 servings
 - [Bahrain Spiced Chicken & Rice (Chicken Machboos)](recipes/poultry/bahrain-chicken-machboos.md) — 75 min, 4 servings — ⚠️ incomplete/unverified
 - [Baked Chicken Lombardy](recipes/poultry/baked-chicken-lombardy.md) — 35 min, 4 servings
+- [Chicken Stir Fry With Vegetables](recipes/poultry/chicken-stir-fry-with-vegetables.md) — 25 min, 4 servings
 - [Classic Creamy Tuscan Chicken](recipes/poultry/classic-creamy-tuscan-chicken.md) — 40 min, 4 servings
 - [Coq au Vin](recipes/poultry/coq-au-vin.md) — 100 min, 6 servings
 - [Easy Broccoli Cashew Chicken Stir Fry](recipes/poultry/broccoli-cashew-chicken-stir-fry.md) — 30 min, 6 servings
@@ -187,9 +191,11 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [High-Protein Caprese Salad](recipes/salads/high-protein-caprese-salad.md) — 5 min, 2 servings — ⚠️ incomplete/unverified
 - [High-Protein No-Mayonnaise Tuna Salad](recipes/salads/high-protein-no-mayonnaise-tuna-salad.md) — 10 min, 3 servings
 - [Lemon-Garlic Dense Bean Salad with Feta](recipes/salads/lemon-garlic-dense-bean-salad-with-feta.md) — 20 min, 4 servings — ⚠️ incomplete/unverified
+- [Matthew McConaughey's Tuna Salad](recipes/salads/matthew-mcconaughey-tuna-salad.md) — 16 min — ⚠️ incomplete/unverified
 - [Mediterranean Chickpea Cucumber Salad](recipes/salads/mediterranean-chickpea-cucumber-salad.md) — 15 min, 6 servings
 - [Mediterranean Lemony Lentil Salad (Gluten-Free, Low-Sodium, Low-Calorie)](recipes/salads/mediterranean-lemony-lentil-salad.md) — 30 min, 8 servings
 - [Mediterranean Potato Salad With Smashed Olives and Mint](recipes/salads/mediterranean-potato-salad-with-smashed-olives-and-mint.md) — 30 min, 10 servings
+- [Melon Tomato Salad](recipes/salads/melon-tomato-salad.md) — 20 min, "6-8" servings
 - [Mexican Street Corn-Inspired Bean Salad](recipes/salads/mexican-street-corn-inspired-bean-salad.md) — 10 min, 6 servings
 - [Napa Valley Avocado & Corn Salad with Creamy Feta Dressing](recipes/salads/napa-valley-avocado-corn-salad.md) — 30 min, 6 servings
 - [Peach Blueberry Cucumber Salad with Feta in Lemon Basil Vinaigrette](recipes/salads/peach-blueberry-cucumber-salad-with-feta.md) — 15 min, 6 servings
@@ -202,6 +208,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Thanksgiving Slaw](recipes/salads/thanksgiving-slaw.md) — 15 min, 8 servings — ⚠️ incomplete/unverified
 - [Three Bean Salad](recipes/salads/three-bean-salad.md) — 25 min, 8 servings
 - [Watermelon Feta Salad with Honey Lime Dressing](recipes/salads/watermelon-feta-salad-with-honey-lime-dressing.md) — 15 min, 4 servings
+- [Watermelon Panzanella Salad](recipes/salads/watermelon-panzanella-salad.md) — 24 min, 4 servings
 - [Zesty Lemon Dill Tuna Salad](recipes/salads/zesty-lemon-dill-tuna-salad.md) — 1 servings — ⚠️ incomplete/unverified
 
 **Sandwiches**
@@ -211,7 +218,9 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Tyler Smith's French Bread Pizza](recipes/sandwiches/french-bread-pizza.md) — 30 min, 4 servings
 
 **Sauces**
+- [Classic Bolognese Sauce](recipes/sauces/classic-bolognese-sauce.md) — 160 min, 4 servings
 - [Richard and Suzanne's Famous Spaghetti Sauce](recipes/sauces/richard-and-suzannes-spaghetti-sauce.md) — 25 min, 6 servings — ⚠️ incomplete/unverified
+- [Sugo della Nonna: Italian Sunday Tomato Sauce](recipes/sauces/sugo-della-nonna-italian-sunday-tomato-sauce.md) — "120-150" min, "4-6" servings
 
 **Sauces & Dressings**
 - [5-Minute Homemade French Salad Dressing](recipes/sauces-dressings/everyday-french-vinaigrette.md) — 5 min
@@ -224,13 +233,14 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Bacalhau com Batata do Claude Troisgros](recipes/seafood-mains/bacalhau-com-batata-do-claude-troisgros.md) — 4 servings
 - [Bacalhau com Batatas ao Murro](recipes/seafood-mains/bacalhau-com-batatas-ao-murro.md) — 4 servings
 - [Bacalhau da Amizade (Brandade de Bacalhau) do Claude Troisgros](recipes/seafood-mains/bacalhau-da-amizade-brandade.md) — 60 min, 4 servings
-- [Bacalhau à Brás](recipes/seafood-mains/bacalhau-a-bras.md) — 2220 min, 4 as an appetizer, 2 as a main course servings — ⚠️ incomplete/unverified
+- [Bacalhau à Brás](recipes/seafood-mains/bacalhau-a-bras.md) — 2220 min, "4 as an appetizer, 2 as a main course" servings — ⚠️ incomplete/unverified
 - [Bacalhau à Lagareiro do Claude Troisgros](recipes/seafood-mains/bacalhau-a-lagareiro.md) — 180 min, 8 servings
 - [Back-to-Basics: How to Make Salmon on the Griddle](recipes/seafood-mains/griddled-salmon.md) — details pending — ⚠️ incomplete/unverified
 - [Baked Halibut](recipes/seafood-mains/baked-halibut.md) — 25 min, 4 servings
 - [Buttery Garlic Lemon Shrimp](recipes/seafood-mains/buttery-garlic-lemon-shrimp.md) — 10 min, 4 servings
 - [Cider-Glazed Salmon](recipes/seafood-mains/cider-glazed-salmon.md) — 30 min, 2 servings
 - [Creamy Garlic Shrimp Recipe Is the Best Thing You'll Eat All Week (20 Minutes, 7 Ingredients)](recipes/seafood-mains/creamy-garlic-shrimp.md) — 20 min, 6 servings
+- [Crunchy Ranch Pan-fried Tilapia Recipe](recipes/seafood-mains/crunchy-ranch-pan-fried-tilapia.md) — 15 min, 4 servings
 - [Easy 1-Pan Garlic Shrimp and Ramen Noodles](recipes/seafood-mains/garlic-shrimp-ramen-noodles.md) — 30 min, 4 servings
 - [Gambas al Ajillo (Spanish Garlic Shrimp)](recipes/seafood-mains/gambas-al-ajillo.md) — details pending — ⚠️ incomplete/unverified
 - [Lemon-Garlic Salmon & Broccoli Bowls](recipes/seafood-mains/lemon-garlic-salmon-broccoli-bowls.md) — 30 min, 4 servings
@@ -278,6 +288,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 **Soups**
 - [Amish Cabbage Soup Recipe With Ground Beef (High Fiber, High Protein)](recipes/soups/amish-cabbage-soup-with-ground-beef.md) — 70 min, 6 servings
 - [Brodo di Pollo con Pastina (Italian Chicken Broth with Pastina)](recipes/soups/brodo-di-pollo-con-pastina.md) — 200 min, 6 servings
+- [Cajun Potato Soup](recipes/soups/cajun-potato-soup.md) — 50 min, 4-5 servings
 - [Chicken and Sausage Gumbo (Classic Dark Roux)](recipes/soups/chicken-and-sausage-gumbo-with-dark-roux.md) — 120 min, 6 servings
 - [Colombian Chicken Sancocho](recipes/soups/colombian-chicken-sancocho.md) — 50 min, 6 servings
 - [Creamy Golden Vegetable Blender Soup](recipes/soups/creamy-golden-vegetable-blender-soup.md) — 45 min, 6 servings
@@ -286,7 +297,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Easy Aztec Black Bean Soup](recipes/soups/easy-aztec-black-bean-soup.md) — 30 min, 6 servings
 - [Easy Chicken & Sausage Gumbo](recipes/soups/chicken-sausage-gumbo.md) — 30 min, 6 servings
 - [German Potato Soup with Sausage](recipes/soups/german-potato-soup-with-sausage.md) — 41 min, 8 servings
-- [Hearty Lentil Soup with Chorizo and Spinach](recipes/soups/hearty-lentil-soup-with-chorizo-and-spinach.md) — 75 min, 6 to 8 servings — ⚠️ incomplete/unverified
+- [Hearty Lentil Soup with Chorizo and Spinach](recipes/soups/hearty-lentil-soup-with-chorizo-and-spinach.md) — 75 min, "6 to 8" servings — ⚠️ incomplete/unverified
 - [High-Protein Creamy Mediterranean White Bean Soup](recipes/soups/creamy-mediterranean-white-bean-soup.md) — 35 min, 6 servings
 - [Italian Zuppa di Farro](recipes/soups/italian-zuppa-di-farro.md) — 120 min — ⚠️ incomplete/unverified
 - [Kristen Bell's Pickle Soup](recipes/soups/kristen-bells-pickle-soup.md) — details pending — ⚠️ incomplete/unverified
@@ -305,7 +316,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 
 ## Flipboard import (in progress)
 
-29 more recipes were added in batch 5 (226 → 255) of converting the ["Food & Flavors" Flipboard magazine](https://flipboard.com/@enetoe/food-flavors-acbn0akgy) (batch 1 added the first 62, batch 2 added 50 more, batch 3 added 56 more, batch 4 added 42 more — the magazine has about 7,734 saved stories total). Batch 5 scrolled back through roughly 2025 into December 2024 (Flipboard's feed still doesn't support resuming from a bookmarked position, so the scroll re-surfaced much of batches 1-4's range before reaching new territory), collecting 118 raw candidate URLs before duplicate/roundup filtering. Yield was lower than batches 1-3 because most of this range had already been picked over by prior batches — the large majority of collected URLs turned out to be exact or near-duplicate titles already in the cookbook. A handful of blocked-domain fetches (southernliving.com, delish.com, allrecipes.com, two gamintraveler.com pages, six receitas.globo.com pages) were recovered via a Claude-in-Chrome browser fallback rather than the sandbox's raw fetch tool. Roundup/listicle links, non-recipe articles, and confirmed duplicates (including same-dish republishes under a new date path on gamintraveler.com) were intentionally skipped rather than guessed at. See `_build/flipboard-batch-5-report.md` for the full accounting (and the batch 1-4 reports for earlier batches), plus `_cookbook-meta-prompt.md` §6c for the duplicate-detection rule this project runs before every batch. Just say "convert the next batch" to continue with batch 6.
+11 more recipes were added in batch 6 (255 → 266) of converting the ["Food & Flavors" Flipboard magazine](https://flipboard.com/@enetoe/food-flavors-acbn0akgy) (batch 1 added the first 62, batch 2 added 50 more, batch 3 added 56 more, batch 4 added 42 more, batch 5 added 29 more — the magazine has about 7,736 saved stories total). Batch 6 scrolled the feed across two full sessions (376 raw story URLs collected total, including a second pass that ran all the way to the magazine's own "end of feed" footer), but yield was much lower than every prior batch: after duplicate/roundup filtering, only 28 single-recipe candidates remained from the first scroll, and the second scroll's 144 URLs turned out to be almost entirely re-surfaced duplicates of recipes already in the now 255-to-266-recipe cookbook or confirmed roundups/listicles — only 2 candidates survived filtering, and both were already-known skips (a same-dish gamintraveler.com republish and a source with no real quantities). This is expected: as the cookbook approaches 270+ recipes, the magazine's ~400 unique reachable stories per session increasingly overlap what's already been converted. Roundup/listicle links, non-recipe articles, and confirmed duplicates (including same-dish republishes under a new date path on gamintraveler.com) were intentionally skipped rather than guessed at, and one gamintraveler.com aglio-e-olio republish was merged as an "also republished at" citation into its existing file per §6c rather than duplicated. See `_build/flipboard-batch-6-report.md` for the full accounting (and the batch 1-5 reports for earlier batches), plus `_cookbook-meta-prompt.md` §6c for the duplicate-detection rule this project runs before every batch. Just say "convert the next batch" to continue with batch 7 — a fresh scroll session may reach further into the magazine's older stories.
 
 ## Quick actions (just ask Claude)
 - "Add this recipe: [paste URL or text]"

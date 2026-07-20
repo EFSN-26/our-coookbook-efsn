@@ -58,3 +58,4 @@ _(none yet)_
 ## Source
 - Original recipe: [Italian Nonnas Make This 15-Minute Meal When There's Nothing In The Fridge: How To Make Spaghetti Aglio E Olio](https://www.gamintraveler.com/2026/07/08/the-15-minute-pantry-recipe-italian-nonnas-swear-by-that-saves-dinner-every-time/) by Ruben Arribas
 - Retrieved: 2026-07-16
+- Also republished at: [The 10-Minute Italian Pasta That Makes Expensive Sauces Look Unnecessary](https://www.gamintraveler.com/2026/07/12/how-to-make-aglio-e-olio/) (same site, same recipe/ingredients/instructions, different date path — found during the 2026-07-20 Flipboard batch, candidate title "The 5-Ingredient Italian Pasta That Makes Fancy Recipes Look Silly")
