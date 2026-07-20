@@ -310,7 +310,7 @@
   }
   ul.ingredients li:last-child{border-bottom:none}
   ul.ingredients li .qty{font-weight:700;color:var(--fern-dark);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  ul.ingredients li .qty-secondary{color:var(--ink-soft);font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.ingredients li .qty-secondary{color:var(--ink-soft);font-size:.92rem;white-space:normal;overflow-wrap:break-word}
   ul.ingredients li .ing-name{min-width:0}
 
   ol.steps{padding-left:0;list-style:none;counter-reset:step}
@@ -364,7 +364,7 @@
   }
   ul.shopping-items li:last-child{border-bottom:none}
   ul.shopping-items li .qty{font-weight:700;color:var(--fern-dark);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  ul.shopping-items li .qty-secondary{color:var(--ink-soft);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.shopping-items li .qty-secondary{color:var(--ink-soft);font-size:.9rem;white-space:normal;overflow-wrap:break-word}
   ul.shopping-items li.checked .ing-name,
   ul.shopping-items li.checked .qty,
   ul.shopping-items li.checked .qty-secondary{text-decoration:line-through;color:var(--ink-soft);opacity:.6}
@@ -506,14 +506,14 @@
        ingredient name gets the rest of the (narrow) screen width instead
        of being squeezed by three fixed-px columns. */
     ul.ingredients li{
-      grid-template-columns:74px 1fr;grid-template-rows:auto auto;row-gap:2px;
+      grid-template-columns:98px 1fr;grid-template-rows:auto auto;row-gap:2px;
     }
     ul.ingredients li .qty{grid-column:1;grid-row:1}
     ul.ingredients li .qty-secondary{grid-column:1;grid-row:2}
     ul.ingredients li .ing-name{grid-column:2;grid-row:1 / span 2;align-self:center}
 
     ul.shopping-items li{
-      grid-template-columns:26px 74px 1fr;grid-template-rows:auto auto;row-gap:2px;
+      grid-template-columns:26px 98px 1fr;grid-template-rows:auto auto;row-gap:2px;
     }
     ul.shopping-items li input[type="checkbox"]{grid-column:1;grid-row:1 / span 2;align-self:center}
     ul.shopping-items li .qty{grid-column:2;grid-row:1}
@@ -528,7 +528,7 @@
   <div class="wrap header-row">
     <div class="titleblock">
       <h1>Our Cookbook</h1>
-      <div class="meta"><span id="recipeCount">255</span> recipes - last built 2026-07-19 20:48</div>
+      <div class="meta"><span id="recipeCount">255</span> recipes - last built 2026-07-20 13:20</div>
     </div>
     <div class="searchbar">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
