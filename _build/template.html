@@ -501,24 +501,25 @@
     .recipe-detail .hero h2{font-size:1.6rem}
     .detail-body{padding:20px}
 
-    /* Ingredient / shopping-list rows: stack the primary and secondary
-       quantity on top of each other in a narrow first column so the
-       ingredient name gets the rest of the (narrow) screen width instead
-       of being squeezed by three fixed-px columns. */
+    /* Ingredient / shopping-list rows: quantity + US-equivalent sit side
+       by side on their own auto-width line (so neither ever gets clipped
+       or has the number split from its unit by a mid-string wrap), and
+       the ingredient name gets its own full-width line below instead of
+       being squeezed into a narrow fixed-px column. */
     ul.ingredients li{
-      grid-template-columns:98px 1fr;grid-template-rows:auto auto;row-gap:2px;
+      grid-template-columns:auto 1fr;grid-template-rows:auto auto;row-gap:4px;column-gap:8px;
     }
-    ul.ingredients li .qty{grid-column:1;grid-row:1}
-    ul.ingredients li .qty-secondary{grid-column:1;grid-row:2}
-    ul.ingredients li .ing-name{grid-column:2;grid-row:1 / span 2;align-self:center}
+    ul.ingredients li .qty{grid-column:1;grid-row:1;text-align:left;white-space:nowrap}
+    ul.ingredients li .qty-secondary{grid-column:2;grid-row:1;justify-self:start;white-space:nowrap}
+    ul.ingredients li .ing-name{grid-column:1 / span 2;grid-row:2}
 
     ul.shopping-items li{
-      grid-template-columns:26px 98px 1fr;grid-template-rows:auto auto;row-gap:2px;
+      grid-template-columns:26px auto 1fr;grid-template-rows:auto auto;row-gap:4px;column-gap:8px;
     }
     ul.shopping-items li input[type="checkbox"]{grid-column:1;grid-row:1 / span 2;align-self:center}
-    ul.shopping-items li .qty{grid-column:2;grid-row:1}
-    ul.shopping-items li .qty-secondary{grid-column:2;grid-row:2}
-    ul.shopping-items li .ing-name{grid-column:3;grid-row:1 / span 2;align-self:center}
+    ul.shopping-items li .qty{grid-column:2;grid-row:1;text-align:left;white-space:nowrap}
+    ul.shopping-items li .qty-secondary{grid-column:3;grid-row:1;justify-self:start;white-space:nowrap}
+    ul.shopping-items li .ing-name{grid-column:2 / span 2;grid-row:2}
   }
 </style>
 </head>
