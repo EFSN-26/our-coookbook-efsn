@@ -61,4 +61,5 @@ _(none yet)_
 
 ## Source
 - Original recipe: [How To Make Cheese Bread That Tastes Like It Came From A Bakery](https://www.gamintraveler.com/2025/10/03/how-to-make-cheese-bread/) by Ruben Arribas
+- Note: also linked as gamintraveler.com/2024/05/17/how-to-make-cheese-bread/ (same site, same article; resurfaced in the Flipboard batch 8 import, 2026-07-24).
 - Retrieved: 2026-07-16

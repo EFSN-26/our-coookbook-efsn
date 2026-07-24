@@ -12,7 +12,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 
 ## Current recipes
 
-332 recipes across 17 categories. Recipes flagged ⚠️ incomplete/unverified are missing a detail the source didn't state (usually an exact time, servings count, or difficulty) — never a guessed value; open the file's "Missing Information" section to see exactly what's missing, or check the site for the same warning banner (shown at the bottom of the recipe page, below the Print Recipe button).
+348 recipes across 17 categories. Recipes flagged ⚠️ incomplete/unverified are missing a detail the source didn't state (usually an exact time, servings count, or difficulty) — never a guessed value; open the file's "Missing Information" section to see exactly what's missing, or check the site for the same warning banner (shown at the bottom of the recipe page, below the Print Recipe button).
 
 **Appetizers**
 - [Baked Brie with Honey, Walnuts, Figs, and Rosemary](recipes/appetizers/baked-brie-with-the-works.md) — 25 min, 4 servings
@@ -37,6 +37,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Juicy Beef Steak Tips with Rich Mushroom Gravy](recipes/beef/juicy-beef-steak-tips-with-mushroom-gravy.md) — 45 min, 4 servings
 - [Maminha com Manteiga Temperada](recipes/beef/maminha-com-manteiga-temperada.md) — 60 min, 5 servings — ⚠️ incomplete/unverified
 - [Shortcut Budget Beef Tips With Savory Brown Gravy](recipes/beef/budget-beef-tips-with-brown-gravy.md) — 130 min, 8 servings — ⚠️ incomplete/unverified
+- [Pan-Seared Rib-Eye With Mushroom-Hunter's Sauce](recipes/beef/pan-seared-rib-eye-mushroom-hunters-sauce.md) — 60 min, 2 servings
 
 **Beverages**
 - [Boba Tea (Basic Recipe)](recipes/beverages/boba-tea.md) — 25 min, 2 servings
@@ -45,6 +46,8 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Lemon Cucumber Mint Infused Water](recipes/beverages/lemon-cucumber-mint-infused-water.md) — 490 min, 6 servings — ⚠️ incomplete/unverified
 - [Vanilla Chai Protein Smoothie](recipes/beverages/vanilla-chai-protein-smoothie.md) — 5 min, 2 servings
 - [Whipped Strawberry Lemonade](recipes/beverages/whipped-strawberry-lemonade.md) — 70 min, 4 servings
+- [Brazilian Lemonade](recipes/beverages/brazilian-lemonade.md) — details pending — ⚠️ incomplete/unverified
+- [Caipirinha](recipes/beverages/caipirinha.md) — 5 min, 1 serving
 
 **Breads**
 - [Focaccia](recipes/breads/focaccia.md) — "240" min, 8 servings
@@ -57,6 +60,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Nonna's No-Knead Pizza Dough](recipes/breads/no-knead-pizza-dough.md) — 30 min, 16 servings
 - [Savory Mediterranean Spinach Feta Loaf](recipes/breads/mediterranean-spinach-feta-loaf.md) — 70 min, 10 servings
 - [Whole-Loaf Cheesy Garlic Bread](recipes/breads/whole-loaf-cheesy-garlic-bread.md) — 4-8 servings — ⚠️ incomplete/unverified
+- [No-Knead Olive Cheese Bread](recipes/breads/no-knead-olive-cheese-bread.md) — 290 min, makes 1 loaf
 
 **Breakfast**
 - [Creamy Applesauce Oatmeal](recipes/breakfast/creamy-applesauce-oatmeal.md) — 5 min, 1 servings
@@ -93,6 +97,11 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Spooky Sweet Potato Ghost Hand Pies](recipes/desserts/spooky-sweet-potato-ghost-hand-pies.md) — 80 min, 16 servings
 - [Swedish Apple Cake](recipes/desserts/swedish-apple-cake.md) — 60 min, 8 servings — ⚠️ incomplete/unverified
 - [Warm Peach Cake](recipes/desserts/warm-peach-cake.md) — 12 servings — ⚠️ incomplete/unverified
+- [Baked Bananas in Brown Sugar](recipes/desserts/baked-bananas-in-brown-sugar.md) — details pending — ⚠️ incomplete/unverified
+- [Banana Bread Crumb Cake](recipes/desserts/banana-bread-crumb-cake.md) — details pending
+- [Bourbon Chocolate Derby Pie](recipes/desserts/bourbon-chocolate-derby-pie.md) — 50 min, 8 servings
+- [Lemon-Blueberry Trifle](recipes/desserts/lemon-blueberry-trifle.md) — 225 min, 12 servings
+- [Peanut Butter Spider Cookies](recipes/desserts/peanut-butter-spider-cookies.md) — 40 min, 16 servings
 
 **Dips & Spreads**
 - [Authentic Restaurant-Style Italian Bread Dipping Oil](recipes/dips-spreads/italian-bread-dipping-oil.md) — 5 min, 20 servings
@@ -126,6 +135,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Porchetta](recipes/meat-mains/porchetta.md) — details pending — ⚠️ incomplete/unverified
 - [Sausage Stuffed Butternut Squash](recipes/meat-mains/sausage-stuffed-butternut-squash.md) — 60 min, 2 servings
 - [Slow Cooker Lamb Shanks With Red Wine Gravy](recipes/meat-mains/slow-cooker-lamb-shanks-with-red-wine-gravy.md) — 530 min, 2 servings
+- [Batata Rosti com Carne-Seca](recipes/meat-mains/batata-rosti-com-carne-seca.md) — 60 min, 4 servings
 
 **Pasta**
 - [$1000 Baked Spaghetti Pasta Casserole](recipes/pasta/1000-baked-spaghetti-pasta-casserole.md) — 50 min, 6 servings
@@ -196,6 +206,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Savory Slow Cooker Mediterranean Balsamic Chicken](recipes/poultry/savory-slow-cooker-mediterranean-balsamic-chicken.md) — 240 min, 8 servings
 - [Shortcut French Chicken](recipes/poultry/french-chicken.md) — 6 servings — ⚠️ incomplete/unverified
 - [Wine Chicken](recipes/poultry/wine-chicken.md) — 35 min, "4 to 6" servings
+- [Chicken Thigh Marsala](recipes/poultry/chicken-thigh-marsala.md) — details pending
 
 **Salads**
 - [Asparagus Salad](recipes/salads/asparagus-salad.md) — 15 min, 6 servings
@@ -268,6 +279,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Sugo della Nonna: Italian Sunday Tomato Sauce](recipes/sauces/sugo-della-nonna-italian-sunday-tomato-sauce.md) — "120-150" min, "4-6" servings
 - [Classic Bolognese Sauce](recipes/sauces/classic-bolognese-sauce.md) — 160 min, 4 servings
 - [Richard and Suzanne's Famous Spaghetti Sauce](recipes/sauces/richard-and-suzannes-spaghetti-sauce.md) — 25 min, 6 servings — ⚠️ incomplete/unverified
+- [Fermented Garlic With Honey](recipes/sauces/fermented-garlic-with-honey.md) — 20 min, 40 servings
 
 **Sauces & Dressings**
 - [Lebanese Salad Dressing](recipes/sauces-dressings/lebanese-salad-dressing.md) — 4 min, "1 cup" servings
@@ -275,6 +287,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Sugar Free Honey Lime Dressing](recipes/sauces-dressings/sugar-free-honey-lime-dressing.md) — 5 min, 8 servings
 - [5-Minute Homemade French Salad Dressing](recipes/sauces-dressings/everyday-french-vinaigrette.md) — 5 min
 - [Garlic-Dijon Vinaigrette](recipes/sauces-dressings/garlic-dijon-vinaigrette.md) — 10 min, 16 servings
+- [Avocado Cilantro Dressing](recipes/sauces-dressings/avocado-cilantro-dressing.md) — 10 min, 4 servings
 
 **Seafood Mains**
 - [Bacalhau da Amizade (Brandade de Bacalhau) do Claude Troisgros](recipes/seafood-mains/bacalhau-da-amizade-brandade.md) — 60 min, 4 servings
@@ -309,6 +322,7 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Salmon Rockefeller](recipes/seafood-mains/salmon-rockefeller.md) — 30 min, 4 servings
 - [Sheet Pan Mediterranean Garlic Butter Baked Salmon](recipes/seafood-mains/sheet-pan-mediterranean-garlic-butter-baked-salmon.md) — 25 min, 6 servings
 - [Shrimp Scampi](recipes/seafood-mains/shrimp-scampi.md) — details pending — ⚠️ incomplete/unverified
+- [Garlic Steamed Clams](recipes/seafood-mains/garlic-steamed-clams.md) — 20 min, 4 servings
 
 **Sides**
 - [Arroz com Lula (Rice with Squid)](recipes/sides/arroz-com-lula.md) — 50 min, 8 servings
@@ -347,6 +361,8 @@ Every recipe page leads with its description and a compact Prep / Cook / Total /
 - [Shiitake and Broccoli in Soy Garlic Sauce](recipes/sides/shiitake-and-broccoli-in-soy-garlic-sauce.md) — 15 min, 3 servings
 - [Smashed Potatoes](recipes/sides/smashed-potatoes.md) — 50 min, 4 servings
 - [Tasty Turmeric Rice](recipes/sides/turmeric-rice-with-peas-and-lemon.md) — 30 min, 6 servings
+- [Lemon Turmeric Broccoli](recipes/sides/lemon-turmeric-broccoli.md) — 10 min, 4 servings
+- [Sauteed Spinach & Kale](recipes/sides/sauteed-spinach-and-kale.md) — 20 min, 6 servings
 
 **Soups**
 - [Creamy Golden Vegetable Blender Soup](recipes/soups/creamy-golden-vegetable-blender-soup.md) — 45 min, 6 servings

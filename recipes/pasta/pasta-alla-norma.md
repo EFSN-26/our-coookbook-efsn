@@ -64,4 +64,5 @@ _(none yet)_
 
 ## Source
 - Original recipe: [How To Make Pasta Alla Norma Like A Sicilian Grandmother](https://www.gamintraveler.com/2026/05/01/how-to-make-pasta-alla-norma/) by Ruben Arribas
+- Also published at: [Pasta alla Norma](https://xoxobella.com/pasta-alla-norma/) by Bella Bucchiotti, xoxobella.com (a version of the same dish; surfaced again in the Flipboard batch 8 import, 2026-07-24)
 - Retrieved: 2026-07-16

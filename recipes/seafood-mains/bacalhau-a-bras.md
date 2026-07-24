@@ -71,4 +71,5 @@ _(none yet)_
 
 ## Source
 - Original recipe: [Bacalhau à Brás Recipe](https://www.2foodtrippers.com/bacalhau-a-bras/) by Daryl and Mindi Hirsch, 2foodtrippers.com
+- Also published at: [How To Make Bacalhau à Brás](https://www.gamintraveler.com/2024/08/23/how-to-make-bacalhau-a-bras/) by Ruben Arribas, gamintraveler.com (a version of the same dish; surfaced again in the Flipboard batch 8 import, 2026-07-24)
 - Retrieved: 2026-07-17
